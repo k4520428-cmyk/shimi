@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- ===== ページタイトル・メタディスクリプション ===== -->
+  <title>医療職のための転職サービス診断｜医師・薬剤師・看護師向け</title>
+  <meta name="description" content="医師・薬剤師・看護師のための転職サービス診断。9つの質問に答えるだけで、あなたの転職スタイルと相性のよい転職サービスがわかります。所要時間は約1分です。">
+
+  <!-- ===== OGP(SNSでシェアされたときの表示) ===== -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="医療職のための転職サービス診断｜医師・薬剤師・看護師向け">
+  <meta property="og:description" content="9つの質問で、あなたの転職スタイルと相性のよい転職サービスがわかります。所要時間は約1分です。">
+  <!-- ▼ og:image は仮URLです。1200×630px の画像を用意して差し替えてください -->
+  <meta property="og:image" content="https://example.com/images/ogp.png">
+  <!-- ▼ og:url も公開するURLに差し替えてください -->
+  <meta property="og:url" content="https://example.com/">
+  <meta property="og:site_name" content="医療職のための転職サービス診断">
+  <meta property="og:locale" content="ja_JP">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- ===== Google Fonts(Zen Maru Gothic:やわらかく読みやすい丸ゴシック) ===== -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 背景の装飾(やわらかい円) -->
+  <div class="bg-deco" aria-hidden="true">
+    <span class="bg-deco__blob bg-deco__blob--mint"></span>
+    <span class="bg-deco__blob bg-deco__blob--pink"></span>
+  </div>
+
+  <main class="app" id="app">
+
+    <!-- ==================== スタート画面 ==================== -->
+    <section class="screen screen--start is-active" id="screen-start" aria-labelledby="start-title">
+      <div class="card start">
+        <p class="start__badge">医師・薬剤師・看護師向け</p>
+        <h1 class="start__title" id="start-title">
+          <span class="start__title-line">あなたに合う</span>
+          <span class="start__title-line">転職サービス診断</span>
+        </h1>
+        <p class="start__catch">
+          転職で大切にしたいことは、人それぞれ。<br>
+          9つの質問から、あなたの転職スタイルと<br class="pc-only">
+          相性のよい転職サービスをご提案します。
+        </p>
+        <ul class="start__meta">
+          <li><span class="start__meta-icon" aria-hidden="true">⏱</span>所要時間 約1分</li>
+          <li><span class="start__meta-icon" aria-hidden="true">✎</span>全9問・選ぶだけ</li>
+          <li><span class="start__meta-icon" aria-hidden="true">✓</span>登録不要で結果がわかる</li>
+        </ul>
+        <button type="button" class="btn btn--primary btn--large" id="btn-start">
+          診断をはじめる
+        </button>
+        <p class="pr-notice" data-pr-notice></p>
+      </div>
+    </section>
+
+    <!-- ==================== 質問画面 ==================== -->
+    <section class="screen screen--question" id="screen-question" aria-live="polite">
+      <div class="card question">
+        <!-- プログレスバー -->
+        <div class="progress">
+          <div class="progress__label">
+            <span class="progress__current" id="progress-current">1</span>
+            <span class="progress__total"> / <span id="progress-total">9</span>問</span>
+          </div>
+          <div class="progress__bar" role="progressbar" aria-valuemin="0" aria-valuemax="9" aria-valuenow="1" id="progress-bar">
+            <div class="progress__fill" id="progress-fill"></div>
+          </div>
+        </div>
+
+        <!-- 質問本文と選択肢(script.js で差し替え) -->
+        <div class="question__body" id="question-body">
+          <p class="question__number" id="question-number">Q1</p>
+          <h2 class="question__text" id="question-text"></h2>
+          <div class="options" id="options" role="list"></div>
+        </div>
+
+        <button type="button" class="btn btn--back" id="btn-back">
+          <span aria-hidden="true">←</span> 前の質問に戻る
+        </button>
+      </div>
+    </section>
+
+    <!-- ==================== 結果画面 ==================== -->
+    <section class="screen screen--result" id="screen-result" aria-labelledby="result-type-name">
+      <div class="result">
+
+        <!-- ① タイプ名 -->
+        <div class="card result__hero">
+          <p class="result__lead">あなたの診断結果</p>
+          <p class="result__job" id="result-job"></p>
+          <h2 class="result__type-name" id="result-type-name"></h2>
+          <p class="result__catch" id="result-catch"></p>
+        </div>
+
+        <!-- ② このタイプの特徴 -->
+        <div class="card result__section">
+          <h3 class="result__heading">このタイプの特徴</h3>
+          <div class="result__features" id="result-features"></div>
+        </div>
+
+        <!-- ③ CTAボタン(1つ目) -->
+        <div class="cta" data-cta-box></div>
+
+        <!-- ④ おすすめ理由 -->
+        <div class="card result__section">
+          <h3 class="result__heading">このサービスをおすすめする理由</h3>
+          <p class="result__text" id="result-reason"></p>
+        </div>
+
+        <!-- ⑤ 向いている人 -->
+        <div class="card result__section">
+          <h3 class="result__heading">こんな人に向いています</h3>
+          <ul class="check-list" id="result-suitable"></ul>
+        </div>
+
+        <!-- ⑥ 今すぐ行動するメリット -->
+        <div class="card result__section">
+          <h3 class="result__heading">いま動きはじめるメリット</h3>
+          <ul class="merit-list" id="result-merits"></ul>
+        </div>
+
+        <!-- ⑦ 迷っている人への一言 -->
+        <div class="card result__section result__message-card">
+          <h3 class="result__heading">迷っているあなたへ</h3>
+          <p class="result__message" id="result-message"></p>
+        </div>
+
+        <!-- ⑧ 次に取るべき行動 -->
+        <div class="card result__section">
+          <h3 class="result__heading">次にやること</h3>
+          <ol class="step-list" id="result-steps"></ol>
+        </div>
+
+        <!-- ⑨ CTAボタン(2つ目) -->
+        <div class="cta" data-cta-box></div>
+
+        <!-- もう一度診断する -->
+        <div class="result__retry">
+          <button type="button" class="btn btn--ghost" id="btn-retry">もう一度診断する</button>
+        </div>
+
+        <p class="pr-notice" data-pr-notice></p>
+        <p class="disclaimer" id="disclaimer"></p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <small id="footer-copy"></small>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
