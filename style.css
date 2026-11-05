@@ -617,6 +617,51 @@ a {
   color: var(--color-text-sub);
 }
 
+/* サービス紹介カード(結果画面) */
+.service-list {
+  display: grid;
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.service-card {
+  padding: 22px 18px;
+  background: var(--color-surface);
+  border: 2px solid var(--color-pink-light);
+  border-radius: var(--radius-lg);
+}
+
+.service-card__name {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-mint-deep);
+}
+
+.service-card__operator {
+  margin-top: 2px;
+  font-size: 12px;
+  color: var(--color-text-sub);
+}
+
+.service-card__summary {
+  margin-top: 10px;
+  font-size: 15px;
+}
+
+.service-card__points {
+  margin: 14px 0 18px;
+}
+
+.service-card .cta__note {
+  text-align: center;
+}
+
+.service-note {
+  margin-top: 14px;
+  font-size: 12px;
+  color: var(--color-text-sub);
+}
+
 /* ---------- 11. その他 ---------- */
 .result__retry {
   text-align: center;
