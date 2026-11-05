@@ -11,7 +11,8 @@
    【B. 動作(ロジック)】
      - 通常は編集不要です。
 
-   ※ 文言中の {service} は紹介サービス名、{job} は職種名に自動で置き換わります。
+   ※ 文言中の {service} は紹介サービス名、{job} は職種名、{type} はタイプ名に
+     自動で置き換わります。
    ========================================================= */
 
 
@@ -28,9 +29,12 @@ const CONFIG = {
   // 結果画面の下部に表示する注意書き
   disclaimer: '※診断結果は回答内容から傾向を分析したもので、転職の成功や条件を保証するものではありません。各サービスの内容・料金・求人状況は変わることがあるため、最新情報は各公式サイトでご確認ください。',
 
-  // 結果画面「おすすめサービス」の見出し・説明({job} は職種名に置き換わります)
-  servicesHeading: '{job}におすすめの転職サービス',
-  servicesLead: '{job}向けの転職サービスを、各公式サイトの情報をもとにご紹介します。複数のサービスに登録して、求人や担当者との相性を見比べるのもおすすめです。',
+  // 結果画面「おすすめサービス」の見出し・説明
+  // ({job} は職種名、{type} はタイプ名に置き換わります)
+  servicesHeading: '{type}のあなたにおすすめの転職サービス',
+  servicesLead: '診断結果と各公式サイトの情報をもとに、{job}のあなたと相性のよい順にご紹介します。複数のサービスに登録して、求人や担当者との相性を見比べるのもおすすめです。',
+  topBadge: 'あなたにいちばんおすすめ',
+  reasonHeading: 'あなたにおすすめの理由',
   servicesNote: '※サービス内容は2026年11月時点の各公式サイトの記載にもとづきます。最新の内容・求人数・対応エリアは、各公式サイトでご確認ください。',
 
   // CTAボタンの文言({service} はサービス名に置き換わります)
@@ -53,18 +57,21 @@ const CONFIG = {
   typePriority: ['career', 'salary', 'wlb', 'env', 'info'],
 
   // ---------------------------------------------------------
-  // 紹介サービス(職種ごとに1〜2社)
+  // 紹介サービス(職種ごとに2社)
   // ▼ サービスの追加・削除・差し替えは、ここだけを編集してください。
-  //   並び順がそのまま結果画面の表示順になります。
+  //   id       : サービスの識別名(英数字。recommendOrder で使います)
   //   name     : サービス名
   //   operator : 運営会社
   //   url      : リンク先(★現在は公式サイトのトップです。アフィリエイトリンクに差し替えてください)
   //   summary  : 一言での紹介
   //   points   : 特徴(公式サイトに書かれている内容だけを書く。数値は変わりやすいので入れない)
+  //   reasons  : タイプ別の「あなたにおすすめの理由」(診断結果のタイプに応じて1つ表示)
+  //              salary / wlb / career / env / info の5つすべて書いてください。
   // ---------------------------------------------------------
   services: {
     doctor: [
       {
+        id: 'doctorvision',
         name: 'ドクタービジョン',
         operator: '株式会社メディカルリソース(日本調剤グループ)',
         url: 'https://www.doctor-vision.com/',
@@ -76,10 +83,39 @@ const CONFIG = {
           '入職後のフォローまで、完全無料で利用できます。',
           '「職業紹介優良事業者」に認定されています。',
         ],
+        reasons: {
+          salary: '条件交渉の代行や面接への同行があるので、給与や待遇の交渉を一人で抱えずに進められます。',
+          wlb: '常勤・非常勤・スポットの求人を扱っていて、ライフプランのヒアリングもあるため、無理のない働き方を相談しやすいサービスです。',
+          career: 'キャリアプランのヒアリングをもとに求人を紹介してもらえるので、将来を見すえた職場選びに役立ちます。',
+          env: '面接への同行や入職後のフォローがあり、職場が変わることへの不安を相談しながら進められます。',
+          info: '非常勤やスポットの求人もあるので、いきなり常勤で転職しなくても、ほかの職場を知るきっかけをつくれます。',
+        },
+      },
+      {
+        // ★公式サイトの記載をもとに、内容をご確認ください
+        id: 'dr10',
+        name: '医師転職ドットコム',
+        operator: '株式会社メディウェル',
+        url: 'https://www.dr-10.com/',
+        summary: '医師専任のコンサルタントが、常勤・非常勤の転職を支援する医師向けの転職支援サービスです。',
+        points: [
+          '全国・全診療科の常勤・非常勤の求人を扱っています。',
+          '希望条件のヒアリングから、キャリアの相談にのってもらえます。',
+          '給与などの条件交渉や、面接への同行があります。',
+          '利用は無料です。',
+        ],
+        reasons: {
+          salary: '医師専任のコンサルタントが条件交渉まで支援するので、経験に見合った待遇を目指しやすくなります。',
+          wlb: '常勤・非常勤の求人を扱っているので、勤務日数や当直の有無など、働き方の希望に合わせて探せます。',
+          career: '医師専任のコンサルタントに、今後のキャリアについて相談しながら求人を選べます。',
+          env: '面接への同行があるので、職場の雰囲気を確かめながら選考を進められます。',
+          info: '全国・全診療科の求人を扱っているので、まずはどんな選択肢があるのかを知るのに向いています。',
+        },
       },
     ],
     pharmacist: [
       {
+        id: 'mynavi-pharma',
         name: 'マイナビ薬剤師',
         operator: '株式会社マイナビ',
         url: 'https://pharma.mynavi.jp/',
@@ -90,8 +126,16 @@ const CONFIG = {
           '非公開求人の紹介や、年収交渉・面接日程の調整の代行があります。',
           '入職後のアフターフォローまで、完全無料で利用できます。',
         ],
+        reasons: {
+          salary: '年収交渉の代行があり、非公開求人も紹介してもらえるので、条件のよい職場を探しやすくなります。',
+          wlb: '調剤薬局・ドラッグストア・病院・企業など幅広い求人から、働き方に合う職場を比べられます。',
+          career: '病院や一般企業など、いまとは違う分野の求人も含めてキャリアの選択肢を広げられます。',
+          env: '専任のキャリアアドバイザーに、いまの悩みや次の職場に求めることを相談できます。',
+          info: '電話やオンラインでも相談できるので、忙しい中でも自分のペースで情報を集められます。',
+        },
       },
       {
+        id: 'pharmastaff',
         name: 'ファルマスタッフ',
         operator: '株式会社メディカルリソース(日本調剤グループ)',
         url: 'https://www.38-8931.com/',
@@ -103,10 +147,18 @@ const CONFIG = {
           '日本調剤の教育ノウハウを活かした教育サービスを提供しています。',
           '求職者は無料で利用できます。',
         ],
+        reasons: {
+          salary: 'コンサルタントが給与や休日の条件交渉まで支援するので、納得できる条件を目指しやすくなります。',
+          wlb: '正社員のほか派遣の求人も扱っているので、勤務日数や時間を調整しやすい働き方も選べます。',
+          career: '日本調剤の教育ノウハウを活かした教育サービスがあり、転職後も学び続けたい人に向いています。',
+          env: '全国の支店で対面の相談ができ、転職後のフォローもあるので、職場の悩みを相談しながら進められます。',
+          info: '支店・電話・メール・Webと相談方法を選べるので、気軽に話を聞くところから始められます。',
+        },
       },
     ],
     nurse: [
       {
+        id: 'mynavi-nurse',
         name: 'マイナビ看護師',
         operator: '株式会社マイナビ',
         url: 'https://kango.mynavi.jp/',
@@ -118,8 +170,16 @@ const CONFIG = {
           '求人紹介から内定まで、無料でサポートを受けられます。',
           '「医療分野における適正な有料職業紹介事業者」に認定されています。',
         ],
+        reasons: {
+          salary: '条件交渉の代行があり、幅広い職場の求人から条件を比べられるので、待遇の見直しに役立ちます。',
+          wlb: 'クリニック・介護施設・訪問看護ステーション・企業など、夜勤の少ない働き方も含めて選択肢を広げられます。',
+          career: '病院から企業まで幅広い求人があり、面接対策や書類添削も受けられるので、新しい分野に挑戦しやすくなります。',
+          env: 'キャリアアドバイザーが施設に足を運んで現場の情報を集めているので、求人票だけではわからない雰囲気を聞けます。',
+          info: '求人紹介から内定まで無料でサポートを受けられるので、まずは相談して選択肢を知るところから始められます。',
+        },
       },
       {
+        id: 'levwell-nurse',
         name: 'レバウェル看護',
         operator: 'レバウェル株式会社',
         url: 'https://kango-oshigoto.jp/',
@@ -130,8 +190,45 @@ const CONFIG = {
           '給与や勤務条件の交渉に加え、退職交渉まで相談できます。',
           '入職後のアフターフォローまで、完全無料で利用できます。',
         ],
+        reasons: {
+          salary: '給与や勤務条件の交渉に加えて退職交渉まで相談できるので、条件アップを目指す転職を進めやすくなります。',
+          wlb: '勤務地を市区町村・路線・駅から探せるので、通勤しやすさも含めて暮らしに合う職場を選べます。',
+          career: '模擬面接や履歴書のサポートがあるので、希望の職場に挑戦するときの選考対策ができます。',
+          env: '退職交渉まで相談できるので、いまの職場を円満に離れて新しい環境へ移りやすくなります。',
+          info: 'LINEでも相談できるので、すき間時間に気軽に情報を集められます。',
+        },
       },
     ],
+  },
+
+  // ---------------------------------------------------------
+  // タイプ別のおすすめ順(職種ごと)
+  // ▼ 診断結果のタイプに合わせて、上の services をこの順に表示します。
+  //   先頭のサービスに「あなたにいちばんおすすめ」のバッジが付きます。
+  //   書かれていないサービスは、末尾に services の並び順で表示します。
+  // ---------------------------------------------------------
+  recommendOrder: {
+    doctor: {
+      salary: ['dr10', 'doctorvision'],
+      wlb:    ['doctorvision', 'dr10'],
+      career: ['dr10', 'doctorvision'],
+      env:    ['doctorvision', 'dr10'],
+      info:   ['doctorvision', 'dr10'],
+    },
+    pharmacist: {
+      salary: ['mynavi-pharma', 'pharmastaff'],
+      wlb:    ['pharmastaff', 'mynavi-pharma'],
+      career: ['pharmastaff', 'mynavi-pharma'],
+      env:    ['pharmastaff', 'mynavi-pharma'],
+      info:   ['mynavi-pharma', 'pharmastaff'],
+    },
+    nurse: {
+      salary: ['levwell-nurse', 'mynavi-nurse'],
+      wlb:    ['mynavi-nurse', 'levwell-nurse'],
+      career: ['mynavi-nurse', 'levwell-nurse'],
+      env:    ['mynavi-nurse', 'levwell-nurse'],
+      info:   ['levwell-nurse', 'mynavi-nurse'],
+    },
   },
 };
 
@@ -233,8 +330,8 @@ const QUESTIONS = [
      features    : ② このタイプの特徴(1要素=1行)
      message     : 迷っている人への一言
      nextSteps   : 次にやること(番号付きリスト)
-   ※ おすすめサービスの紹介文・リンクは、タイプではなく職種ごとに
-     CONFIG.services から自動で取得します(タイプによって変わりません)。
+   ※ おすすめサービスは、職種とタイプの組み合わせで CONFIG.recommendOrder の
+     順に並び、各サービスの reasons からタイプ別の理由を表示します。
    ========================================================= */
 const RESULTS = {
   salary: {
@@ -366,11 +463,12 @@ const els = {
 
 /* ---------- B-3. 汎用関数 ---------- */
 
-// 文言中の {service} {job} を置き換える
+// 文言中の {service} {job} {type} を置き換える
 function fillText(text, vars) {
   return text
     .replace(/\{service\}/g, vars.service || '')
-    .replace(/\{job\}/g, vars.job || '');
+    .replace(/\{job\}/g, vars.job || '')
+    .replace(/\{type\}/g, vars.type || '');
 }
 
 // 要素を作ってテキストを入れる(HTMLとして解釈しないので安全)
@@ -522,13 +620,34 @@ function calculateResult() {
 
 /* ---------- B-6. 結果画面 ---------- */
 
+// 職種とタイプから、おすすめ順に並べたサービス一覧を返す
+function getRecommendedServices(job, type) {
+  const services = CONFIG.services[job] || [];
+  const order = (CONFIG.recommendOrder[job] || {})[type] || [];
+  const rank = (service) => {
+    const i = order.indexOf(service.id);
+    return i === -1 ? order.length + services.indexOf(service) : i;
+  };
+  return [...services].sort((a, b) => rank(a) - rank(b));
+}
+
 // サービス紹介カードを作る(サービスごとに1枚)
-function buildServiceCard(service) {
+function buildServiceCard(service, type, isTop) {
   const vars = { service: service.name };
-  const card = createEl('article', 'service-card');
+  const card = createEl('article', isTop ? 'service-card service-card--top' : 'service-card');
+  if (isTop) card.append(createEl('p', 'service-card__badge', CONFIG.topBadge));
   card.append(createEl('h4', 'service-card__name', service.name));
   card.append(createEl('p', 'service-card__operator', `運営:${service.operator}`));
   card.append(createEl('p', 'service-card__summary', service.summary));
+
+  // タイプ別の「おすすめの理由」
+  const reason = service.reasons && service.reasons[type];
+  if (reason) {
+    const box = createEl('div', 'service-card__reason');
+    box.append(createEl('p', 'service-card__reason-heading', CONFIG.reasonHeading));
+    box.append(createEl('p', 'service-card__reason-text', reason));
+    card.append(box);
+  }
 
   const list = createEl('ul', 'check-list service-card__points');
   renderList(list, service.points, vars);
@@ -552,8 +671,8 @@ function buildServiceCard(service) {
 function showResult() {
   const { type, job } = calculateResult();
   const result = RESULTS[type];
-  const services = CONFIG.services[job];
-  const vars = { job: CONFIG.jobs[job] };
+  const services = getRecommendedServices(job, type);
+  const vars = { job: CONFIG.jobs[job], type: result.name };
 
   // ① タイプ名
   $('result-job').textContent = `${CONFIG.jobs[job]}のあなたは…`;
@@ -565,10 +684,12 @@ function showResult() {
     ...result.features.map((line) => createEl('p', '', fillText(line, vars)))
   );
 
-  // ③ おすすめサービス(職種ごと)
+  // ③ おすすめサービス(職種×タイプでおすすめ順に)
   $('result-services-heading').textContent = fillText(CONFIG.servicesHeading, vars);
   $('result-services-lead').textContent = fillText(CONFIG.servicesLead, vars);
-  $('result-services').replaceChildren(...services.map(buildServiceCard));
+  $('result-services').replaceChildren(
+    ...services.map((service, i) => buildServiceCard(service, type, i === 0))
+  );
   $('result-services-note').textContent = CONFIG.servicesNote;
 
   // ④ 迷っている人への一言
