@@ -28,10 +28,14 @@ const CONFIG = {
   // 結果画面の下部に表示する注意書き
   disclaimer: '※診断結果は回答内容から傾向を分析したもので、転職の成功や条件を保証するものではありません。各サービスの内容・料金・求人状況は変わることがあるため、最新情報は各公式サイトでご確認ください。',
 
+  // 結果画面「おすすめサービス」の見出し・説明({job} は職種名に置き換わります)
+  servicesHeading: '{job}におすすめの転職サービス',
+  servicesLead: '{job}向けの転職サービスを、各公式サイトの情報をもとにご紹介します。複数のサービスに登録して、求人や担当者との相性を見比べるのもおすすめです。',
+  servicesNote: '※サービス内容は2026年11月時点の各公式サイトの記載にもとづきます。最新の内容・求人数・対応エリアは、各公式サイトでご確認ください。',
+
   // CTAボタンの文言({service} はサービス名に置き換わります)
-  ctaLead: 'あなたのタイプにおすすめのサービス',
   ctaButtonLabel: '{service}に無料登録する',
-  ctaNote: '登録は無料です。まずは求人を見るだけでも大丈夫です。',
+  ctaNote: '登録・利用は無料です。まずは求人を見るだけでも大丈夫です。',
 
   // 選択肢をタップしてから次の質問へ進むまでの時間(ミリ秒)
   // ハイライトを見せるための「間」です。短くしすぎると選択が見えません。
@@ -49,33 +53,85 @@ const CONFIG = {
   typePriority: ['career', 'salary', 'wlb', 'env', 'info'],
 
   // ---------------------------------------------------------
-  // 紹介サービスとCTAリンク(職種 × タイプ)
-  // ▼ リンクやサービス名を差し替えるときは、ここだけを編集してください。
-  //   結果画面の上下2つのCTAボタンに自動で反映されます。
-  //   ※ 現在はすべて仮のサービス名・仮URLです。
+  // 紹介サービス(職種ごとに1〜2社)
+  // ▼ サービスの追加・削除・差し替えは、ここだけを編集してください。
+  //   並び順がそのまま結果画面の表示順になります。
+  //   name     : サービス名
+  //   operator : 運営会社
+  //   url      : リンク先(★現在は公式サイトのトップです。アフィリエイトリンクに差し替えてください)
+  //   summary  : 一言での紹介
+  //   points   : 特徴(公式サイトに書かれている内容だけを書く。数値は変わりやすいので入れない)
   // ---------------------------------------------------------
   services: {
-    doctor: {
-      salary: { name: '(仮)ドクター年収ナビ',     url: 'https://example.com/doctor/salary' },
-      wlb:    { name: '(仮)ドクターゆとり求人',   url: 'https://example.com/doctor/wlb' },
-      career: { name: '(仮)ドクターキャリア相談', url: 'https://example.com/doctor/career' },
-      env:    { name: '(仮)ドクター職場ナビ',     url: 'https://example.com/doctor/env' },
-      info:   { name: '(仮)ドクタースカウト',     url: 'https://example.com/doctor/info' },
-    },
-    pharmacist: {
-      salary: { name: '(仮)ファーマ年収ナビ',     url: 'https://example.com/pharmacist/salary' },
-      wlb:    { name: '(仮)ファーマゆとり求人',   url: 'https://example.com/pharmacist/wlb' },
-      career: { name: '(仮)ファーマキャリア相談', url: 'https://example.com/pharmacist/career' },
-      env:    { name: '(仮)ファーマ職場ナビ',     url: 'https://example.com/pharmacist/env' },
-      info:   { name: '(仮)ファーマスカウト',     url: 'https://example.com/pharmacist/info' },
-    },
-    nurse: {
-      salary: { name: '(仮)ナース年収ナビ',     url: 'https://example.com/nurse/salary' },
-      wlb:    { name: '(仮)ナースゆとり求人',   url: 'https://example.com/nurse/wlb' },
-      career: { name: '(仮)ナースキャリア相談', url: 'https://example.com/nurse/career' },
-      env:    { name: '(仮)ナース職場ナビ',     url: 'https://example.com/nurse/env' },
-      info:   { name: '(仮)ナーススカウト',     url: 'https://example.com/nurse/info' },
-    },
+    doctor: [
+      {
+        name: 'ドクタービジョン',
+        operator: '株式会社メディカルリソース(日本調剤グループ)',
+        url: 'https://www.doctor-vision.com/',
+        summary: '常勤・非常勤・スポットの医師求人を、全国47都道府県から探せる転職支援サービスです。',
+        points: [
+          'キャリアプランやライフプランのヒアリングをもとに、求人を紹介してもらえます。',
+          '履歴書・職務経歴書の作成アドバイスや、面接の日程調整をサポートします。',
+          '条件交渉の代行や面接への同行など、一人では進めにくい場面も支えてくれます。',
+          '入職後のフォローまで、完全無料で利用できます。',
+          '「職業紹介優良事業者」に認定されています。',
+        ],
+      },
+    ],
+    pharmacist: [
+      {
+        name: 'マイナビ薬剤師',
+        operator: '株式会社マイナビ',
+        url: 'https://pharma.mynavi.jp/',
+        summary: '薬剤師専任のキャリアアドバイザーが転職をサポートする、マイナビグループのサービスです。',
+        points: [
+          '調剤薬局・ドラッグストア・病院・一般企業など、幅広い求人から探せます。',
+          '来社面談のほか、電話やオンラインでも相談できます。',
+          '非公開求人の紹介や、年収交渉・面接日程の調整の代行があります。',
+          '入職後のアフターフォローまで、完全無料で利用できます。',
+        ],
+      },
+      {
+        name: 'ファルマスタッフ',
+        operator: '株式会社メディカルリソース(日本調剤グループ)',
+        url: 'https://www.38-8931.com/',
+        summary: '調剤薬局を運営する日本調剤グループの、薬剤師専門の求人・転職支援サービスです。',
+        points: [
+          '全国に支店があり、支店での相談のほか、電話・メール・Webでも相談できます。',
+          '必要書類の作成、面接日時の調整、給与や休日の条件交渉までコンサルタントが支援します。',
+          '転職後のフォローがあり、正社員のほか派遣の求人も扱っています。',
+          '日本調剤の教育ノウハウを活かした教育サービスを提供しています。',
+          '求職者は無料で利用できます。',
+        ],
+      },
+    ],
+    nurse: [
+      {
+        name: 'マイナビ看護師',
+        operator: '株式会社マイナビ',
+        url: 'https://kango.mynavi.jp/',
+        summary: '病院・施設・クリニックなど幅広い求人を扱う、マイナビグループの看護師向け転職支援サービスです。',
+        points: [
+          '病院・クリニック・介護施設・訪問看護ステーション・企業など、さまざまな職場の求人があります。',
+          'キャリアアドバイザーが各施設に足を運び、現場の情報を集めています。',
+          '面接対策・書類添削のほか、条件交渉や日程調整の代行があります。',
+          '求人紹介から内定まで、無料でサポートを受けられます。',
+          '「医療分野における適正な有料職業紹介事業者」に認定されています。',
+        ],
+      },
+      {
+        name: 'レバウェル看護',
+        operator: 'レバウェル株式会社',
+        url: 'https://kango-oshigoto.jp/',
+        summary: '全国の求人を、都道府県・市区町村・路線・駅から探せる看護師向け転職支援サービスです。',
+        points: [
+          'LINEでも相談でき、電話での希望条件のヒアリングから始められます。',
+          '履歴書のサポートや模擬面接など、選考対策を受けられます。',
+          '給与や勤務条件の交渉に加え、退職交渉まで相談できます。',
+          '入職後のアフターフォローまで、完全無料で利用できます。',
+        ],
+      },
+    ],
   },
 };
 
@@ -117,7 +173,7 @@ const QUESTIONS = [
       { label: '頑張りが給与に反映されていないと感じた',     score: { salary: 3 } },
       { label: '体力面や家庭の事情で、働き方を変えたくなった', score: { wlb: 3 } },
       { label: 'もっと専門性を高めたいと思った',             score: { career: 3 } },
-      { label: '特にきっかけはなく、なんとなく気になっている', score: { info: 3 } },
+      { label: '今の職場で働き続ける事が想像できないため', score: { info: 3 } },
     ],
   },
   {
@@ -165,15 +221,6 @@ const QUESTIONS = [
       { label: '具体的にはまだ考えていない',             score: { info: 2, env: 1 } },
     ],
   },
-  {
-    text: '転職サービスの担当者とは、どのくらい連絡をとりたいですか?',
-    options: [
-      { label: 'こまめに相談しながら進めたい',         score: { career: 1, env: 2 } },
-      { label: '交渉など大事な場面で頼りたい',         score: { salary: 2 } },
-      { label: '希望に合う求人があるときだけでいい',   score: { wlb: 2, info: 1 } },
-      { label: 'まずは連絡なしで、求人だけ見てみたい', score: { info: 3 } },
-    ],
-  },
 ];
 
 
@@ -184,12 +231,10 @@ const QUESTIONS = [
      name        : ① タイプ名
      catchCopy   : タイプ名の下に出る一言
      features    : ② このタイプの特徴(1要素=1行)
-     reason      : ④ おすすめ理由
-     suitableFor : ⑤ 向いている人(箇条書き)
-     merits      : ⑥ いま動きはじめるメリット(箇条書き)
-     message     : ⑦ 迷っている人への一言
-     nextSteps   : ⑧ 次にやること(番号付きリスト)
-   ※ CTAリンクは CONFIG.services から自動で取得します。
+     message     : 迷っている人への一言
+     nextSteps   : 次にやること(番号付きリスト)
+   ※ おすすめサービスの紹介文・リンクは、タイプではなく職種ごとに
+     CONFIG.services から自動で取得します(タイプによって変わりません)。
    ========================================================= */
 const RESULTS = {
   salary: {
@@ -201,21 +246,9 @@ const RESULTS = {
       '必要であれば、給与や手当の交渉にも前向きに取り組めます。',
       '相場の情報と交渉のサポートがあると、強みをより活かしやすくなります。',
     ],
-    reason: '年収アップを目指すなら、{job}の求人を多く扱い、条件交渉のサポートを受けられるエージェント型のサービスが向いています。{service}では、担当者が給与水準や手当の相場を踏まえて求人を紹介し、自分では切り出しにくい条件面の確認や交渉も相談しながら進められます。',
-    suitableFor: [
-      'いまの給与が、仕事内容や経験に見合っていないと感じている',
-      '自分の市場価値(年収相場)を知りたい',
-      '条件交渉を一人で進めるのは不安がある',
-      '複数の求人を比較して、納得して選びたい',
-    ],
-    merits: [
-      '自分の経験で、どのくらいの年収が目安になるかを早めに把握できます。',
-      '求人は時期によって入れ替わるため、早めに登録しておくと比較できる選択肢が増えます。',
-      '登録しても、すぐに転職する必要はありません。相場を知るだけでも、いまの職場での判断材料になります。',
-    ],
     message: '「年収を上げたい」と考えるのは、決してわがままではありません。まずは自分の経験がどう評価されるのかを知るところから始めてみませんか。転職するかどうかは、そのあとでゆっくり決めて大丈夫です。',
     nextSteps: [
-      '{service}に無料登録する',
+      '気になるサービスに無料登録する(まずは1〜2社でOK)',
       '担当者に、希望年収・勤務地・働き方を伝える',
       '紹介された求人で、年収や手当の相場を確認する',
       '比較したうえで、応募するかどうかをじっくり判断する',
@@ -231,21 +264,9 @@ const RESULTS = {
       '勤務時間や休日数など、働き方の条件をていねいに確認したいと考えています。',
       '希望の条件で絞り込める求人に出会えると、満足度の高い転職につながりやすいタイプです。',
     ],
-    reason: '働き方を見直したい方には、日勤のみ・残業少なめ・土日休みなど、勤務条件で求人を探しやすいサービスが向いています。{service}では、{job}向けに勤務時間や休日数などの条件を細かく伝えたうえで求人を紹介してもらえるため、求人票だけではわかりにくい実際の働き方も確認しやすくなります。',
-    suitableFor: [
-      '夜勤や当直、残業の負担を減らしたい',
-      '子育てや介護など、家庭と両立できる職場を探している',
-      '休日をしっかり確保したい',
-      '体調を崩す前に、働き方を見直したい',
-    ],
-    merits: [
-      '希望する働き方の求人が、どのくらいあるのかを把握できます。',
-      '働き方を変える選択肢を知っておくだけでも、気持ちに余裕が生まれます。',
-      '登録後も、自分のタイミングで求人を検討できます。',
-    ],
     message: '働き方を見直したいと思うのは、仕事をこれからも長く続けるための大切な一歩です。いまの職場で頑張り続けるか、環境を変えるか。比べられる材料をそろえてから決めても遅くはありません。',
     nextSteps: [
-      '{service}に無料登録する',
+      '気になるサービスに無料登録する(まずは1〜2社でOK)',
       '勤務時間・休日・夜勤や当直の有無など、希望条件を整理して伝える',
       '紹介された求人の、実際の残業時間や休みの取りやすさを確認する',
       'いまの職場と比べて、納得できる選択肢かどうかを判断する',
@@ -261,21 +282,9 @@ const RESULTS = {
       '目先の条件だけでなく、数年後の自分にとってプラスになる職場を選びたいと考えています。',
       '長い目でキャリアを一緒に考えてくれる相談相手がいると、心強く進められます。',
     ],
-    reason: 'キャリアアップを目指すなら、{job}の専門分野や将来像まで踏まえて相談できるエージェント型のサービスが向いています。{service}では、教育体制や扱う症例・業務の幅といった、成長につながる情報を確認しながら求人を検討できます。すぐの転職だけでなく、中長期のキャリア相談として利用するのもひとつの方法です。',
-    suitableFor: [
-      '専門性を高められる職場で働きたい',
-      '認定資格の取得や新しい分野への挑戦を考えている',
-      '将来的に管理職やリーダーを目指したい',
-      'キャリアの方向性について、第三者の意見を聞きたい',
-    ],
-    merits: [
-      '自分の経験が、どんな分野・ポジションで活かせるかを客観的に知ることができます。',
-      '教育体制の整った職場など、条件のよい求人は早く埋まることもあるため、情報を早めに受け取れます。',
-      'すぐに転職しない場合でも、これからのキャリアプランを考えるきっかけになります。',
-    ],
     message: '挑戦したい気持ちがあるときは、選択肢を広げる絶好のタイミングです。とはいえ、焦って決める必要はありません。まずは「どんな道があるのか」を知ることから始めてみてください。',
     nextSteps: [
-      '{service}に無料登録する',
+      '気になるサービスに無料登録する(まずは1〜2社でOK)',
       '目指したい専門分野や将来像を、担当者に伝える',
       '教育体制・症例数・業務の幅などを求人ごとに比較する',
       '数年後の自分にとってプラスになるかを基準に判断する',
@@ -291,21 +300,9 @@ const RESULTS = {
       '次の職場では、安心して働ける雰囲気やチームワークを大切にしたいと考えています。',
       '求人票だけではわからない「職場の中のこと」を知ってから選ぶと、ミスマッチを防ぎやすくなります。',
     ],
-    reason: '職場環境を変えたい方には、職場の雰囲気や人間関係、離職率などの内部事情に詳しいサービスが向いています。{service}では、担当者が{job}の職場の様子を把握したうえで求人を紹介してくれるため、入職前に「どんな人が働いているか」「どんな雰囲気か」を確認しやすくなります。',
-    suitableFor: [
-      '人間関係に悩んでいて、環境を変えたい',
-      '次の職場では、雰囲気や人間関係で失敗したくない',
-      '離職率や職場の雰囲気など、求人票にない情報を知りたい',
-      '自分に合う職場を、相談しながら探したい',
-    ],
-    merits: [
-      '職場の雰囲気や離職率など、自分だけでは調べにくい情報を得られます。',
-      '「ほかにも選択肢がある」と知るだけで、いまの職場での気持ちが楽になることもあります。',
-      '登録したからといって、必ず転職しなければいけないわけではありません。',
-    ],
     message: '職場の人間関係に悩むのは、あなたが弱いからではありません。環境が合っていないだけ、ということもよくあります。まずは話を聞いてもらうだけでも、気持ちの整理につながるはずです。',
     nextSteps: [
-      '{service}に無料登録する',
+      '気になるサービスに無料登録する(まずは1〜2社でOK)',
       'いまの職場で悩んでいることと、次の職場に求める雰囲気を伝える',
       '気になる求人について、職場の雰囲気や離職率を確認する',
       '可能であれば見学などを通じて、実際の雰囲気を確かめてから判断する',
@@ -321,21 +318,9 @@ const RESULTS = {
       '勢いで決めるより、情報をそろえて納得してから動きたいと考えています。',
       '自分のペースで情報を集められる方法を選ぶと、無理なく検討を進められます。',
     ],
-    reason: 'まだ情報収集の段階なら、自分のペースで求人を見られるスカウト型やサイト型のサービスが向いています。{service}は、{job}の求人を気軽に閲覧したり、プロフィールを登録して声がかかるのを待ったりできるタイプのサービスです。気になる求人が見つかってから、相談するかどうかを決められます。',
-    suitableFor: [
-      '転職するかどうか、まだ決めていない',
-      'まずは求人の相場や、どんな職場があるかを知りたい',
-      '担当者とのやりとりは、最小限にしたい',
-      'よい条件の求人があれば考えたい',
-    ],
-    merits: [
-      '求人の相場を知っておくと、いまの職場の条件を客観的に見直せます。',
-      'いざ転職したくなったときに、スムーズに動き出せます。',
-      '自分のペースで使えるので、忙しい時期でも負担になりにくいです。',
-    ],
     message: '「まだ迷っている」というのも、立派なひとつの答えです。情報を知ったうえで、いまの職場に残ると決めるのも前向きな選択。まずは気軽にのぞいてみるところから始めてみませんか。',
     nextSteps: [
-      '{service}に無料登録する',
+      '気になるサービスに無料登録する(まずは1〜2社でOK)',
       '気になる地域や働き方で、求人をいくつか見てみる',
       'いまの職場と、給与や働き方を比べてみる',
       '気になる求人が見つかったら、詳しい話を聞くか検討する',
@@ -537,11 +522,17 @@ function calculateResult() {
 
 /* ---------- B-6. 結果画面 ---------- */
 
-// CTAボックスを作る(上下2か所で同じものを使う)
-function buildCta(service, vars) {
-  const fragment = document.createDocumentFragment();
-  fragment.append(createEl('p', 'cta__lead', CONFIG.ctaLead));
-  fragment.append(createEl('p', 'cta__service', service.name));
+// サービス紹介カードを作る(サービスごとに1枚)
+function buildServiceCard(service) {
+  const vars = { service: service.name };
+  const card = createEl('article', 'service-card');
+  card.append(createEl('h4', 'service-card__name', service.name));
+  card.append(createEl('p', 'service-card__operator', `運営:${service.operator}`));
+  card.append(createEl('p', 'service-card__summary', service.summary));
+
+  const list = createEl('ul', 'check-list service-card__points');
+  renderList(list, service.points, vars);
+  card.append(list);
 
   const link = createEl('a', 'btn btn--cta');
   link.href = service.url;
@@ -551,18 +542,18 @@ function buildCta(service, vars) {
   const arrow = createEl('span', 'btn__arrow', '→');
   arrow.setAttribute('aria-hidden', 'true');
   link.append(arrow);
-  fragment.append(link);
+  card.append(link);
 
-  fragment.append(createEl('p', 'cta__note', CONFIG.ctaNote));
-  return fragment;
+  card.append(createEl('p', 'cta__note', CONFIG.ctaNote));
+  return card;
 }
 
 // 結果を表示する
 function showResult() {
   const { type, job } = calculateResult();
   const result = RESULTS[type];
-  const service = CONFIG.services[job][type];
-  const vars = { service: service.name, job: CONFIG.jobs[job] };
+  const services = CONFIG.services[job];
+  const vars = { job: CONFIG.jobs[job] };
 
   // ① タイプ名
   $('result-job').textContent = `${CONFIG.jobs[job]}のあなたは…`;
@@ -574,24 +565,16 @@ function showResult() {
     ...result.features.map((line) => createEl('p', '', fillText(line, vars)))
   );
 
-  // ③⑨ CTA(上下2か所)
-  document.querySelectorAll('[data-cta-box]').forEach((box) => {
-    box.replaceChildren(buildCta(service, vars));
-  });
+  // ③ おすすめサービス(職種ごと)
+  $('result-services-heading').textContent = fillText(CONFIG.servicesHeading, vars);
+  $('result-services-lead').textContent = fillText(CONFIG.servicesLead, vars);
+  $('result-services').replaceChildren(...services.map(buildServiceCard));
+  $('result-services-note').textContent = CONFIG.servicesNote;
 
-  // ④ おすすめ理由
-  $('result-reason').textContent = fillText(result.reason, vars);
-
-  // ⑤ 向いている人
-  renderList($('result-suitable'), result.suitableFor, vars);
-
-  // ⑥ メリット
-  renderList($('result-merits'), result.merits, vars);
-
-  // ⑦ 迷っている人への一言
+  // ④ 迷っている人への一言
   $('result-message').textContent = fillText(result.message, vars);
 
-  // ⑧ 次にやること
+  // ⑤ 次にやること
   renderList($('result-steps'), result.nextSteps, vars);
 
   showScreen('result');
