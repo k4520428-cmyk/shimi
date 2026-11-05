@@ -165,15 +165,6 @@ const QUESTIONS = [
       { label: '具体的にはまだ考えていない',             score: { info: 2, env: 1 } },
     ],
   },
-  {
-    text: '転職サービスの担当者とは、どのくらい連絡をとりたいですか?',
-    options: [
-      { label: 'こまめに相談しながら進めたい',         score: { career: 1, env: 2 } },
-      { label: '交渉など大事な場面で頼りたい',         score: { salary: 2 } },
-      { label: '希望に合う求人があるときだけでいい',   score: { wlb: 2, info: 1 } },
-      { label: 'まずは連絡なしで、求人だけ見てみたい', score: { info: 3 } },
-    ],
-  },
 ];
 
 
