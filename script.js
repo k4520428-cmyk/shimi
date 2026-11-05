@@ -117,7 +117,7 @@ const QUESTIONS = [
       { label: '頑張りが給与に反映されていないと感じた',     score: { salary: 3 } },
       { label: '体力面や家庭の事情で、働き方を変えたくなった', score: { wlb: 3 } },
       { label: 'もっと専門性を高めたいと思った',             score: { career: 3 } },
-      { label: '特にきっかけはなく、なんとなく気になっている', score: { info: 3 } },
+      { label: '今の職場で働き続ける事が想像できないため', score: { info: 3 } },
     ],
   },
   {
