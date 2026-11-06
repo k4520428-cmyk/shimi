@@ -16,6 +16,7 @@
   /* 文字 */
   --color-text: #5A3D30;        /* ブラウン(本文) */
   --color-text-sub: #7D6255;    /* ブラウン淡(補足文) */
+  --color-logo: #1A1A1A;        /* ロゴ「HIRAQU」(黒) */
 
   /* ミント(メインカラー) */
   --color-mint: #8CC5A8;
@@ -262,11 +263,12 @@ a {
 /* ロゴ(HIRAQU) */
 .start__logo {
   margin-bottom: 4px;
+  font-family: "Poppins", var(--font-base);
   font-size: 52px;
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.2;
-  letter-spacing: 0.12em;
-  color: var(--color-mint-deep);
+  letter-spacing: 0.08em;
+  color: var(--color-logo);
 }
 
 /* サブタイトル(医師・薬剤師・看護師の適職診断) */
