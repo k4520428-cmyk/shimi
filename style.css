@@ -259,6 +259,22 @@ a {
   padding: 0 4px;
 }
 
+/* ロゴ(HIRAQU) */
+.start__logo {
+  margin-bottom: 4px;
+  font-size: 52px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.12em;
+  color: var(--color-mint-deep);
+}
+
+/* サブタイトル(医師・薬剤師・看護師の適職診断) */
+.start__logo + .start__title-line {
+  font-size: clamp(14px, 4.2vw, 22px);
+  white-space: nowrap;
+}
+
 .start__catch {
   margin-top: 20px;
   font-size: 15px;
