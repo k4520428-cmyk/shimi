@@ -662,6 +662,131 @@ a {
   color: var(--color-text-sub);
 }
 
+/* 5段階で答える質問(選択肢の高さを少しだけ詰める) */
+.options--likert {
+  gap: 10px;
+}
+
+.options--likert .option {
+  min-height: 50px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+/* 志向のバランス(横棒グラフ) */
+.traits {
+  display: grid;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.trait {
+  display: grid;
+  grid-template-columns: 7.5em 1fr 3em;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+}
+
+.trait__label {
+  color: var(--color-text-sub);
+}
+
+.trait__bar {
+  height: 12px;
+  background: var(--color-mint-pale);
+  border-radius: var(--radius-pill);
+  overflow: hidden;
+}
+
+.trait__fill {
+  display: block;
+  height: 100%;
+  background: var(--color-mint);
+  border-radius: var(--radius-pill);
+}
+
+.trait__value {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  color: var(--color-text-sub);
+}
+
+.trait.is-top .trait__label,
+.trait.is-top .trait__value {
+  color: var(--color-mint-deep);
+  font-weight: 700;
+}
+
+.trait.is-top .trait__fill {
+  background: var(--color-mint-deep);
+}
+
+.traits__note {
+  margin-top: 14px;
+}
+
+/* 気をつけたいこと */
+.watch {
+  margin-top: 18px;
+  padding: 14px 16px;
+  background: var(--color-pink-light);
+  border-radius: var(--radius-md);
+}
+
+.watch__label {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-cta);
+}
+
+.watch__text {
+  margin-top: 4px;
+  font-size: 15px;
+}
+
+/* 資格を活かせる仕事 */
+.job-list {
+  display: grid;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.job-card {
+  padding: 16px 18px;
+  background: var(--color-mint-pale);
+  border-left: 4px solid var(--color-mint);
+  border-radius: var(--radius-md);
+}
+
+.job-card__title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--color-mint-deep);
+}
+
+.job-card__desc {
+  margin-top: 4px;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.job-sub__heading {
+  margin-top: 24px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.job-list--sub .job-card {
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  border-left: 4px solid var(--color-pink);
+}
+
+.job-list--sub .job-card__title {
+  color: var(--color-text);
+}
+
 /* ---------- 11. その他 ---------- */
 .result__retry {
   text-align: center;
