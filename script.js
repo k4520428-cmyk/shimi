@@ -28,6 +28,18 @@ const CONFIG = {
   // 結果画面の下部に表示する注意書き
   disclaimer: '※診断結果は回答内容から働き方の傾向を示したもので、適性や転職の成功、採用条件を保証するものではありません。仕事によっては、実務経験・専門医や認定などの資格・追加の免許が求められる場合があります。各サービスの内容・求人状況は変わることがあるため、最新情報は各公式サイトでご確認ください。',
 
+  // ---------------------------------------------------------
+  // X(Twitter)シェア
+  //   url      : シェアするページのURL(公開URLが変わったらここを変更)
+  //   text     : 投稿文。{job} は職種名、{type} はタイプ名に置き換わります
+  //   hashtags : ハッシュタグ(# は不要)
+  // ---------------------------------------------------------
+  share: {
+    url: 'https://k4520428-cmyk.github.io/shimi/',
+    text: 'HIRAQUで適職診断をしたら、{job}の私は「{type}」でした!\nあなたは何タイプ?',
+    hashtags: ['HIRAQU', '適職診断'],
+  },
+
   // 結果画面「資格を活かせる仕事」の見出し・説明({job} は職種名に置き換わります)
   jobsHeading: '{job}の資格を活かせる、あなた向きの仕事',
   jobsLead: 'あなたの志向と相性がよい、{job}の国家資格を活かせる仕事の例です。職種名だけで決めず、実際の業務内容や働き方も確かめてみてください。',
@@ -494,11 +506,22 @@ const els = {
 
 /* ---------- B-3. 汎用関数 ---------- */
 
-// 文言中の {service} {job} を置き換える
+// 文言中の {service} {job} {type} を置き換える
 function fillText(text, vars) {
   return text
     .replace(/\{service\}/g, vars.service || '')
-    .replace(/\{job\}/g, vars.job || '');
+    .replace(/\{job\}/g, vars.job || '')
+    .replace(/\{type\}/g, vars.type || '');
+}
+
+// X(Twitter)の投稿画面を開くURLを作る
+function buildShareUrl(vars) {
+  const params = new URLSearchParams({
+    text: fillText(CONFIG.share.text, vars),
+    url: CONFIG.share.url,
+    hashtags: CONFIG.share.hashtags.join(','),
+  });
+  return `https://x.com/intent/tweet?${params.toString()}`;
 }
 
 // 要素を作ってテキストを入れる(HTMLとして解釈しないので安全)
@@ -773,6 +796,12 @@ function showResult() {
 
   // ⑦ 次にやること
   renderList($('result-steps'), result.nextSteps, vars);
+
+  // X(Twitter)シェアボタン
+  const shareUrl = buildShareUrl({ job: CONFIG.jobs[job], type: `${result.name}タイプ` });
+  document.querySelectorAll('[data-share-x]').forEach((link) => {
+    link.href = shareUrl;
+  });
 
   showScreen('result');
 }

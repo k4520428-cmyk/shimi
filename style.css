@@ -814,6 +814,42 @@ a {
   color: var(--color-text);
 }
 
+/* X(Twitter)シェアボタン */
+.btn--x {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 18px;
+  background: #000;
+  color: #fff;
+}
+
+.btn--x:hover {
+  background: #333;
+}
+
+.btn--x__logo {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
+.result__share {
+  text-align: center;
+}
+
+.result__share-lead {
+  font-size: 14px;
+  color: var(--color-text-sub);
+}
+
+.result__share .btn--x {
+  margin-top: 10px;
+  min-width: 240px;
+}
+
 /* ---------- 11. その他 ---------- */
 .result__retry {
   text-align: center;

@@ -102,6 +102,11 @@
           <p class="result__job" id="result-job"></p>
           <h2 class="result__type-name" id="result-type-name"></h2>
           <p class="result__catch" id="result-catch"></p>
+          <!-- X(Twitter)でシェア(リンク先は script.js で設定) -->
+          <a class="btn btn--x" data-share-x target="_blank" rel="noopener">
+            <svg class="btn--x__logo" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            <span>結果をXでシェアする</span>
+          </a>
         </div>
 
         <!-- ② 志向のバランス -->
@@ -151,6 +156,15 @@
         </div>
 
         <!-- もう一度診断する -->
+        <!-- X(Twitter)でシェア(ページ下部) -->
+        <div class="result__share">
+          <p class="result__share-lead">診断結果をシェアして、まわりの人にも試してもらおう</p>
+          <a class="btn btn--x" data-share-x target="_blank" rel="noopener">
+            <svg class="btn--x__logo" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            <span>結果をXでシェアする</span>
+          </a>
+        </div>
+
         <div class="result__retry">
           <button type="button" class="btn btn--ghost" id="btn-retry">もう一度診断する</button>
         </div>
