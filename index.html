@@ -5,29 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- ===== ページタイトル・メタディスクリプション ===== -->
-  <title>医療職のための転職サービス診断｜医師・薬剤師・看護師向け</title>
-  <meta name="description" content="医師・薬剤師・看護師のための転職サービス診断。8つの質問に答えるだけで、あなたの転職スタイルと相性のよい転職サービスがわかります。所要時間は約1分です。">
+  <title>HIRAQU｜医師・薬剤師・看護師の適職診断</title>
+  <meta name="description" content="HIRAQU(ひらく)は、医師・薬剤師・看護師のための適職診断。19の質問に答えるだけで、あなたの働き方の志向と、国家資格を活かせる向いている仕事がわかります。所要時間は約3分です。">
 
   <!-- ===== OGP(SNSでシェアされたときの表示) ===== -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="医療職のための転職サービス診断｜医師・薬剤師・看護師向け">
-  <meta property="og:description" content="8つの質問で、あなたの転職スタイルと相性のよい転職サービスがわかります。所要時間は約1分です。">
+  <meta property="og:title" content="HIRAQU｜医師・薬剤師・看護師の適職診断">
+  <meta property="og:description" content="19の質問で、あなたの働き方の志向と、国家資格を活かせる向いている仕事がわかります。所要時間は約3分です。">
   <!-- ▼ og:image は images/ogp.png(1200×630px)。画像を差し替えるときは同じファイル名で上書きしてください -->
   <!--   ※ OGPは絶対URLで指定する必要があります。公開URLが変わったらここも変更してください -->
   <meta property="og:image" content="https://k4520428-cmyk.github.io/shimi/images/ogp.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="医師・薬剤師・看護師向け あなたに合う転職サービス診断">
+  <meta property="og:image:alt" content="HIRAQU 医師・薬剤師・看護師の適職診断">
   <!-- ▼ og:url は公開しているページのURLです -->
   <meta property="og:url" content="https://k4520428-cmyk.github.io/shimi/">
-  <meta property="og:site_name" content="医療職のための転職サービス診断">
+  <meta property="og:site_name" content="HIRAQU">
   <meta property="og:locale" content="ja_JP">
   <meta name="twitter:card" content="summary_large_image">
 
-  <!-- ===== Google Fonts(Zen Maru Gothic:やわらかく読みやすい丸ゴシック) ===== -->
+  <!-- ===== Google Fonts(Zen Maru Gothic:やわらかく読みやすい丸ゴシック / Poppins:ロゴ「HIRAQU」用) ===== -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&family=Poppins:wght@600&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="style.css">
 </head>
@@ -43,19 +43,19 @@
     <!-- ==================== スタート画面 ==================== -->
     <section class="screen screen--start is-active" id="screen-start" aria-labelledby="start-title">
       <div class="card start">
-        <p class="start__badge">医師・薬剤師・看護師向け</p>
+        <p class="start__badge">資格を活かせる道を、ひらく</p>
         <h1 class="start__title" id="start-title">
-          <span class="start__title-line">あなたに合う</span>
-          <span class="start__title-line">転職サービス診断</span>
+          <span class="start__title-line start__logo">HIRAQU</span>
+          <span class="start__title-line">医師・薬剤師・看護師の適職診断</span>
         </h1>
         <p class="start__catch">
-          転職で大切にしたいことは、人それぞれ。<br>
-          8つの質問から、あなたの転職スタイルと<br class="pc-only">
-          相性のよい転職サービスをご提案します。
+          資格を活かせる場所は、病院だけではありません。<br>
+          19の質問から、あなたの働き方の志向と<br class="pc-only">
+          国家資格を活かせる、向いている仕事をご提案します。
         </p>
         <ul class="start__meta">
-          <li><span class="start__meta-icon" aria-hidden="true">⏱</span>所要時間 約1分</li>
-          <li><span class="start__meta-icon" aria-hidden="true">✎</span>全8問・選ぶだけ</li>
+          <li><span class="start__meta-icon" aria-hidden="true">⏱</span>所要時間 約3分</li>
+          <li><span class="start__meta-icon" aria-hidden="true">✎</span>全19問・選ぶだけ</li>
           <li><span class="start__meta-icon" aria-hidden="true">✓</span>登録不要で結果がわかる</li>
         </ul>
         <button type="button" class="btn btn--primary btn--large" id="btn-start">
@@ -72,9 +72,9 @@
         <div class="progress">
           <div class="progress__label">
             <span class="progress__current" id="progress-current">1</span>
-            <span class="progress__total"> / <span id="progress-total">8</span>問</span>
+            <span class="progress__total"> / <span id="progress-total">19</span>問</span>
           </div>
-          <div class="progress__bar" role="progressbar" aria-valuemin="0" aria-valuemax="9" aria-valuenow="1" id="progress-bar">
+          <div class="progress__bar" role="progressbar" aria-valuemin="0" aria-valuemax="19" aria-valuenow="1" id="progress-bar">
             <div class="progress__fill" id="progress-fill"></div>
           </div>
         </div>
@@ -104,13 +104,33 @@
           <p class="result__catch" id="result-catch"></p>
         </div>
 
-        <!-- ② このタイプの特徴 -->
+        <!-- ② 志向のバランス -->
+        <div class="card result__section">
+          <h3 class="result__heading">あなたの志向のバランス</h3>
+          <div class="traits" id="result-traits"></div>
+          <p class="result__text traits__note" id="result-traits-note"></p>
+        </div>
+
+        <!-- ③ このタイプの特徴 -->
         <div class="card result__section">
           <h3 class="result__heading">このタイプの特徴</h3>
           <div class="result__features" id="result-features"></div>
+          <div class="watch">
+            <p class="watch__label">気をつけたいこと</p>
+            <p class="watch__text" id="result-watch"></p>
+          </div>
         </div>
 
-        <!-- ③ おすすめサービス(職種ごとに1〜2社) -->
+        <!-- ④ 資格を活かせる仕事(タイプ × 職種) -->
+        <div class="card result__section">
+          <h3 class="result__heading" id="result-jobs-heading"></h3>
+          <p class="result__text" id="result-jobs-lead"></p>
+          <div class="job-list" id="result-jobs"></div>
+          <p class="job-sub__heading" id="result-subjobs-heading"></p>
+          <div class="job-list job-list--sub" id="result-subjobs"></div>
+        </div>
+
+        <!-- ⑤ おすすめサービス(職種ごとに1〜2社) -->
         <div class="card result__section">
           <h3 class="result__heading" id="result-services-heading"></h3>
           <p class="result__text" id="result-services-lead"></p>
@@ -118,13 +138,13 @@
           <p class="service-note" id="result-services-note"></p>
         </div>
 
-        <!-- ④ 迷っている人への一言 -->
+        <!-- ⑥ 迷っている人への一言 -->
         <div class="card result__section result__message-card">
           <h3 class="result__heading">迷っているあなたへ</h3>
           <p class="result__message" id="result-message"></p>
         </div>
 
-        <!-- ⑤ 次に取るべき行動 -->
+        <!-- ⑦ 次に取るべき行動 -->
         <div class="card result__section">
           <h3 class="result__heading">次にやること</h3>
           <ol class="step-list" id="result-steps"></ol>
