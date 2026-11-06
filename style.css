@@ -14,8 +14,8 @@
   --color-border: #F0E5D8;      /* カードの枠線 */
 
   /* 文字 */
-  --color-text: #5A3D30;        /* ブラウン(本文) */
-  --color-text-sub: #7D6255;    /* ブラウン淡(補足文) */
+  --color-text: #3E2A20;        /* ブラウン(本文)。白背景とのコントラスト比 約13.5 */
+  --color-text-sub: #5C4438;    /* ブラウン淡(補足文)。白背景とのコントラスト比 約9.0 */
   --color-logo: #1A1A1A;        /* ロゴ「HIRAQU」(黒) */
 
   /* ミント(メインカラー) */
@@ -61,6 +61,7 @@ body {
   min-height: 100vh;
   font-family: var(--font-base);
   font-size: 16px;
+  font-weight: 500;             /* 丸ゴシックの細さでぼやけて見えないよう、標準より少し太く */
   line-height: 1.8;
   color: var(--color-text);
   background: var(--color-bg);
@@ -68,6 +69,8 @@ body {
   -webkit-font-smoothing: antialiased;
   /* 日本語を文節単位で改行し、単語の途中で折り返さないようにする(対応ブラウザのみ) */
   word-break: auto-phrase;
+  /* ただし文節が長すぎて画面幅に収まらないときは、途中で折り返す */
+  overflow-wrap: anywhere;
   text-wrap: pretty;
 }
 
@@ -436,6 +439,7 @@ a {
 /* ---------- 9. 結果画面 ---------- */
 .result {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);  /* 中身が長くても画面幅をはみ出さない */
   gap: 16px;
 }
 
@@ -463,7 +467,11 @@ a {
 
 .result__type-name {
   margin-top: 12px;
-  font-size: 28px;
+  font-size: clamp(19px, 6vw, 28px);
+  /* 折り返すときは「〇〇」と「タイプ」の間(script.js で <wbr> を入れている)や「・」で区切る。
+     それでも収まらないときだけ途中で折り返す */
+  word-break: keep-all;
+  overflow-wrap: anywhere;
   line-height: 1.4;
   font-weight: 700;
   color: var(--color-mint-deep);
@@ -700,7 +708,7 @@ a {
 
 .trait {
   display: grid;
-  grid-template-columns: 7.5em 1fr 3em;
+  grid-template-columns: 8.5em 1fr 3em;
   align-items: center;
   gap: 10px;
   font-size: 14px;
@@ -708,6 +716,7 @@ a {
 
 .trait__label {
   color: var(--color-text-sub);
+  white-space: nowrap;
 }
 
 .trait__bar {

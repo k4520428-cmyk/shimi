@@ -735,7 +735,8 @@ function showResult() {
 
   // ① タイプ名
   $('result-job').textContent = `${CONFIG.jobs[job]}のあなたは…`;
-  $('result-type-name').textContent = `${result.name}タイプ`;
+  // 「〇〇」と「タイプ」の間で折り返せるよう <wbr> を入れる
+  $('result-type-name').replaceChildren(result.name, document.createElement('wbr'), 'タイプ');
   $('result-catch').textContent = result.catchCopy;
 
   // ② 志向のバランス
