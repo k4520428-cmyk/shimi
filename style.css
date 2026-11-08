@@ -629,7 +629,39 @@ a {
   box-shadow: 0 8px 20px rgba(196, 87, 100, 0.3);
 }
 
+/* 文字はボタン中央に揃え、矢印は右端に固定(折り返し時も左右バランスを保つ) */
+.btn--cta {
+  position: relative;
+  padding-left: 44px;
+  padding-right: 44px;
+  text-align: center;
+  line-height: 1.5;
+  word-break: keep-all;
+}
+
+.btn--cta .btn__label-part {
+  display: inline-block;
+}
+
+/* 幅の狭いスマホでは余白と文字を少し詰めて、「サービス名に」を1行に収める */
+@media (max-width: 340px) {
+  .btn--cta {
+    padding-left: 28px;
+    padding-right: 34px;
+    font-size: 15px;
+  }
+
+  .btn--cta .btn__arrow {
+    right: 14px;
+  }
+}
+
 .btn--cta .btn__arrow {
+  position: absolute;
+  right: 22px;
+  top: 50%;
+  margin-top: -0.75em;
+  line-height: 1.5;
   transition: transform var(--duration-fast);
 }
 

@@ -738,7 +738,17 @@ function buildServiceCard(service) {
   link.href = service.url;
   link.target = '_blank';
   link.rel = 'noopener sponsored';
-  link.append(createEl('span', '', fillText(CONFIG.ctaButtonLabel, vars)));
+  // 「サービス名に」と「無料登録する」を途中で切れない塊にして、折り返し位置をそこに限定する
+  const label = createEl('span', 'btn__label');
+  const fullLabel = fillText(CONFIG.ctaButtonLabel, vars);
+  const headLabel = fillText(CONFIG.ctaButtonLabel.split('}')[0] + '}', vars) + (CONFIG.ctaButtonLabel.charAt(CONFIG.ctaButtonLabel.indexOf('}') + 1) || '');
+  if (fullLabel.startsWith(headLabel) && headLabel !== fullLabel) {
+    label.append(createEl('span', 'btn__label-part', headLabel));
+    label.append(createEl('span', 'btn__label-part', fullLabel.slice(headLabel.length)));
+  } else {
+    label.append(fullLabel);
+  }
+  link.append(label);
   const arrow = createEl('span', 'btn__arrow', '→');
   arrow.setAttribute('aria-hidden', 'true');
   link.append(arrow);
