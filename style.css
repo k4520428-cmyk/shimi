@@ -637,8 +637,23 @@ a {
   text-align: center;
   line-height: 1.5;
   word-break: keep-all;
-  overflow-wrap: anywhere;
-  text-wrap: balance;
+}
+
+.btn--cta .btn__label-part {
+  display: inline-block;
+}
+
+/* 幅の狭いスマホでは余白と文字を少し詰めて、「サービス名に」を1行に収める */
+@media (max-width: 340px) {
+  .btn--cta {
+    padding-left: 28px;
+    padding-right: 34px;
+    font-size: 15px;
+  }
+
+  .btn--cta .btn__arrow {
+    right: 14px;
+  }
 }
 
 .btn--cta .btn__arrow {
