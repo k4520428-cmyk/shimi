@@ -276,8 +276,18 @@ a {
 
 /* サブタイトル(医師・薬剤師・看護師の適職診断) */
 .start__logo + .start__title-line {
-  font-size: clamp(14px, 4.2vw, 22px);
-  white-space: nowrap;
+  margin-top: 6px;
+  font-size: clamp(19px, 6.4vw, 30px);
+  line-height: 1.6;
+  letter-spacing: 0.05em;
+  text-wrap: balance;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* 「医師・薬剤師・看護師の」「適職診断」を塊にして、折り返しを文節の切れ目に限定 */
+.start__title-part {
+  display: inline-block;
 }
 
 .start__catch {
