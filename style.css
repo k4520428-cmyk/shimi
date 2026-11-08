@@ -281,9 +281,17 @@ a {
 }
 
 .start__catch {
-  margin-top: 20px;
-  font-size: 15px;
-  color: var(--color-text-sub);
+  margin-top: 22px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.9;
+  color: var(--color-text);
+  text-wrap: balance;
+}
+
+/* 文節ごとに塊にして、折り返しが文節の切れ目になるようにする */
+.start__catch-part {
+  display: inline-block;
 }
 
 .start__meta {
@@ -929,7 +937,7 @@ a {
   }
 
   .start__catch {
-    font-size: 16px;
+    font-size: 20px;
   }
 
   .pc-only {
