@@ -29,6 +29,16 @@ const CONFIG = {
   disclaimer: '※診断結果は回答内容から働き方の傾向を示したもので、適性や転職の成功、採用条件を保証するものではありません。仕事によっては、実務経験・専門医や認定などの資格・追加の免許が求められる場合があります。各サービスの内容・求人状況は変わることがあるため、最新情報は各公式サイトでご確認ください。',
 
   // ---------------------------------------------------------
+  // アクセス解析(Googleアナリティクス4)
+  //   ga4Id : GA4の「測定ID」(G- から始まる文字列)を入れると計測が始まります。
+  //           空欄のあいだは何も読み込まず、計測もしません。
+  //   ※ 送るのは「職種・診断タイプ・どのボタンを押したか」だけで、各質問の回答内容は送りません。
+  // ---------------------------------------------------------
+  analytics: {
+    ga4Id: '',
+  },
+
+  // ---------------------------------------------------------
   // X(Twitter)シェア
   //   url      : シェアするページのURL(公開URLが変わったらここを変更)
   //   text     : 投稿文。{job} は職種名、{type} はタイプ名に置き換わります
@@ -38,6 +48,14 @@ const CONFIG = {
     url: 'https://k4520428-cmyk.github.io/shimi/',
     text: 'HIRAQUで適職診断をしたら、{job}の私は「{type}」でした!\nあなたは何タイプ?',
     hashtags: ['HIRAQU', '適職診断'],
+    // シェア経由の訪問を見分けるため、シェアするURLに付けるパラメータ(UTM)
+    //   {job} {type} は職種キー・タイプキー(例: nurse_care)に置き換わります
+    utm: {
+      utm_source: 'x',
+      utm_medium: 'social_share',
+      utm_campaign: 'result_share',
+      utm_content: '{job}_{type}',
+    },
   },
 
   // 結果画面「資格を活かせる仕事」の見出し・説明({job} は職種名に置き換わります)
@@ -514,11 +532,20 @@ function fillText(text, vars) {
     .replace(/\{type\}/g, vars.type || '');
 }
 
+// URLにUTMパラメータを付ける(keys: 置き換え用の職種キー・タイプキー)
+function withUtm(baseUrl, utm, keys) {
+  const url = new URL(baseUrl);
+  Object.entries(utm || {}).forEach(([name, value]) => {
+    url.searchParams.set(name, fillText(value, keys));
+  });
+  return url.toString();
+}
+
 // X(Twitter)の投稿画面を開くURLを作る
-function buildShareUrl(vars) {
+function buildShareUrl(vars, keys) {
   const params = new URLSearchParams({
     text: fillText(CONFIG.share.text, vars),
-    url: CONFIG.share.url,
+    url: withUtm(CONFIG.share.url, CONFIG.share.utm, keys),
     hashtags: CONFIG.share.hashtags.join(','),
   });
   return `https://x.com/intent/tweet?${params.toString()}`;
@@ -559,6 +586,38 @@ function getOptionLabels(question) {
     : CONFIG.likertLabels;
 }
 
+/* ---------- B-3b. アクセス解析 ---------- */
+
+// GA4を読み込む(測定IDが設定されているときだけ)
+function loadAnalytics() {
+  const id = CONFIG.analytics.ga4Id;
+  if (!/^G-[A-Z0-9]+$/.test(id)) return;
+  const script = document.createElement('script');
+  script.async = true;
+  script.src = `https://www.googletagmanager.com/gtag/js?id=${id}`;
+  document.head.append(script);
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function gtag() { window.dataLayer.push(arguments); };
+  window.gtag('js', new Date());
+  window.gtag('config', id);
+}
+
+// イベントを送る(計測していないときは何もしない)
+//   diagnosis_start    : 「診断をはじめる」を押した
+//   question_view      : 各質問を表示した(どこで離脱したかを見るため)
+//   diagnosis_complete : 結果画面を表示した
+//   service_click      : おすすめサービスのボタンを押した
+//   share_click        : 「結果をXでシェアする」を押した
+//   diagnosis_retry    : 「もう一度診断する」を押した
+function track(eventName, params = {}) {
+  if (typeof window.gtag === 'function') {
+    window.gtag('event', eventName, params);
+  }
+}
+
+// いまの診断結果(イベントに付ける情報)
+const tracking = { job: '', type: '', subType: '' };
+
 /* ---------- B-4. 質問画面 ---------- */
 
 // いまの質問を表示する
@@ -597,6 +656,8 @@ function renderQuestion() {
     return btn;
   });
   els.options.replaceChildren(...buttons);
+
+  track('question_view', { question_number: index + 1 });
 }
 
 // 選択肢が選ばれたとき
@@ -738,6 +799,13 @@ function buildServiceCard(service) {
   link.href = service.url;
   link.target = '_blank';
   link.rel = 'noopener sponsored';
+  link.addEventListener('click', () => {
+    track('service_click', {
+      service_name: service.name,
+      job: tracking.job,
+      result_type: tracking.type,
+    });
+  });
   // 「サービス名に」と「無料登録する」を途中で切れない塊にして、折り返し位置をそこに限定する
   const label = createEl('span', 'btn__label');
   const fullLabel = fillText(CONFIG.ctaButtonLabel, vars);
@@ -765,6 +833,7 @@ function showResult() {
   const sub = RESULTS[subType];
   const services = CONFIG.services[job];
   const vars = { job: CONFIG.jobs[job] };
+  Object.assign(tracking, { job, type, subType });
 
   // ① タイプ名
   $('result-job').textContent = `${CONFIG.jobs[job]}のあなたは…`;
@@ -808,17 +877,22 @@ function showResult() {
   renderList($('result-steps'), result.nextSteps, vars);
 
   // X(Twitter)シェアボタン
-  const shareUrl = buildShareUrl({ job: CONFIG.jobs[job], type: `${result.name}タイプ` });
+  const shareUrl = buildShareUrl(
+    { job: CONFIG.jobs[job], type: `${result.name}タイプ` },
+    { job, type }
+  );
   document.querySelectorAll('[data-share-x]').forEach((link) => {
     link.href = shareUrl;
   });
 
   showScreen('result');
+  track('diagnosis_complete', { job, result_type: type, result_sub_type: subType });
 }
 
 /* ---------- B-7. 開始・リセット ---------- */
 
 function startDiagnosis() {
+  track('diagnosis_start');
   state.current = 0;
   state.answers = [];
   state.isLocked = false;
@@ -828,6 +902,7 @@ function startDiagnosis() {
 }
 
 function restart() {
+  track('diagnosis_retry', { job: tracking.job, result_type: tracking.type });
   state.current = 0;
   state.answers = [];
   state.isLocked = false;
@@ -843,6 +918,18 @@ function init() {
   });
   $('disclaimer').textContent = CONFIG.disclaimer;
   $('footer-copy').textContent = `© ${new Date().getFullYear()} ${CONFIG.siteName}`;
+
+  // アクセス解析
+  loadAnalytics();
+  document.querySelectorAll('[data-share-x]').forEach((link, i) => {
+    link.addEventListener('click', () => {
+      track('share_click', {
+        job: tracking.job,
+        result_type: tracking.type,
+        button_position: i === 0 ? 'top' : 'bottom',
+      });
+    });
+  });
 
   // ボタンのイベント
   els.btnStart.addEventListener('click', startDiagnosis);
