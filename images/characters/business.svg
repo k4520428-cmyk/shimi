@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="ファーストペンギン">
+<circle cx="120" cy="120" r="112" fill="#FDEBD8"/>
+<ellipse cx="62" cy="146" rx="13" ry="36" transform="rotate(18 62 146)" fill="#34495E" stroke="#3E2A20" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<ellipse cx="184" cy="104" rx="13" ry="36" transform="rotate(-45 184 104)" fill="#34495E" stroke="#3E2A20" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<ellipse cx="100" cy="210" rx="17" ry="8" fill="#F29E4C" stroke="#3E2A20" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/><ellipse cx="140" cy="210" rx="17" ry="8" fill="#F29E4C" stroke="#3E2A20" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<ellipse cx="120" cy="132" rx="64" ry="78" fill="#34495E" stroke="#3E2A20" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<ellipse cx="120" cy="150" rx="44" ry="56" fill="#FFFFFF"/>
+<circle cx="104" cy="104" r="22" fill="#FFFFFF"/><circle cx="136" cy="104" r="22" fill="#FFFFFF"/>
+<ellipse cx="106" cy="102" rx="5" ry="6" fill="#3E2A20"/><ellipse cx="134" cy="102" rx="5" ry="6" fill="#3E2A20"/>
+<ellipse cx="94" cy="116" rx="8" ry="5.5" fill="#E89AA0" opacity=".8"/><ellipse cx="146" cy="116" rx="8" ry="5.5" fill="#E89AA0" opacity=".8"/>
+<polygon points="110,112 130,112 120,124" fill="#F29E4C" stroke="#3E2A20" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M150 140 L180 170 L162 176 L142 148 Z" fill="#E07A3F" stroke="#3E2A20" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<path d="M72 130 Q120 150 168 130 L168 142 Q120 162 72 142 Z" fill="#E07A3F" stroke="#3E2A20" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+</svg>

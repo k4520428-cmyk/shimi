@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-label="なぜなぜフクロウ">
+<circle cx="120" cy="120" r="112" fill="#ECE7F3"/>
+<polygon points="80,66 68,30 102,54" fill="#7C6A9C" stroke="#3E2A20" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/><polygon points="160,66 172,30 138,54" fill="#7C6A9C" stroke="#3E2A20" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<ellipse cx="58" cy="142" rx="15" ry="36" fill="#665785" stroke="#3E2A20" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/><ellipse cx="182" cy="142" rx="15" ry="36" fill="#665785" stroke="#3E2A20" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<ellipse cx="120" cy="132" rx="66" ry="78" fill="#7C6A9C" stroke="#3E2A20" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<ellipse cx="120" cy="162" rx="40" ry="40" fill="#EFE5D2"/>
+<path d="M104 150 q4 5 8 0 M120 150 q4 5 8 0 M112 164 q4 5 8 0 M128 164 q4 5 8 0 M96 164 q4 5 8 0" fill="none" stroke="#B3A38A" stroke-width="2.5" stroke-linecap="round"/>
+<circle cx="96" cy="104" r="24" fill="#FFFFFF" stroke="#3E2A20" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/><circle cx="144" cy="104" r="24" fill="#FFFFFF" stroke="#3E2A20" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="98" cy="106" r="9" fill="#3E2A20"/><circle cx="142" cy="106" r="9" fill="#3E2A20"/>
+<circle cx="101" cy="102" r="3" fill="#fff"/><circle cx="145" cy="102" r="3" fill="#fff"/>
+<polygon points="111,126 129,126 120,140" fill="#F2B25C" stroke="#3E2A20" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+<rect x="88" y="184" width="64" height="24" rx="4" fill="#8CC5A8" stroke="#3E2A20" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/><path d="M120 184 V208" stroke="#3E2A20" stroke-width="4" stroke-linejoin="round" stroke-linecap="round"/>
+</svg>

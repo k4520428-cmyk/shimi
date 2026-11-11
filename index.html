@@ -63,6 +63,45 @@
         </button>
         <p class="pr-notice" data-pr-notice></p>
       </div>
+
+      <!-- S-17：6タイプのキャラ一覧(見るだけ。リンク・ボタンにしない) -->
+      <section class="cast" aria-labelledby="cast-title">
+        <h2 class="cast__title" id="cast-title">あなたはどのキャラ？</h2>
+        <p class="cast__lead">診断の結果は、6つのタイプのどれかで表示されます。<br class="pc-only">あなたに近いのは、どのキャラでしょうか。</p>
+        <ul class="cast__list">
+          <li class="cast__item cast__item--care">
+            <img class="cast__img" src="images/characters/care.svg" width="160" height="160" alt="" decoding="async">
+            <p class="cast__name">よりそいラッコ</p>
+            <p class="cast__type">伴走ケアラー</p>
+          </li>
+          <li class="cast__item cast__item--research">
+            <img class="cast__img" src="images/characters/research.svg" width="160" height="160" alt="" decoding="async">
+            <p class="cast__name">なぜなぜフクロウ</p>
+            <p class="cast__type"><span>探究</span><span>スペシャリスト</span></p>
+          </li>
+          <li class="cast__item cast__item--system">
+            <img class="cast__img" src="images/characters/system.svg" width="160" height="160" alt="" decoding="async">
+            <p class="cast__name">しくみビーバー</p>
+            <p class="cast__type"><span>仕組み</span><span>デザイナー</span></p>
+          </li>
+          <li class="cast__item cast__item--business">
+            <img class="cast__img" src="images/characters/business.svg" width="160" height="160" alt="" decoding="async">
+            <p class="cast__name">ファーストペンギン</p>
+            <p class="cast__type"><span>メディカル</span><span>ビジネス</span><span>開拓者</span></p>
+          </li>
+          <li class="cast__item cast__item--teach">
+            <img class="cast__img" src="images/characters/teach.svg" width="160" height="160" alt="" decoding="async">
+            <p class="cast__name">つたえるハト</p>
+            <p class="cast__type"><span>ナレッジ</span><span>メッセンジャー</span></p>
+          </li>
+          <li class="cast__item cast__item--balance">
+            <img class="cast__img" src="images/characters/balance.svg" width="160" height="160" alt="" decoding="async">
+            <p class="cast__name">マイペースガメ</p>
+            <p class="cast__type"><span>ライフバランス・</span><span>ナビゲーター</span></p>
+          </li>
+        </ul>
+        <p class="cast__note">※キャラクターはタイプのイメージです。</p>
+      </section>
     </section>
 
     <!-- ==================== 質問画面 ==================== -->
@@ -100,6 +139,11 @@
         <div class="card result__hero">
           <p class="result__lead">あなたの診断結果</p>
           <p class="result__job" id="result-job"></p>
+          <div class="result__char">
+            <img class="result__char-img" id="result-char-img" src="" width="160" height="160" alt="" decoding="async">
+            <p class="result__char-name" id="result-char-name"></p>
+            <p class="result__char-line" id="result-char-line"></p>
+          </div>
           <h2 class="result__type-name" id="result-type-name"></h2>
           <p class="result__catch" id="result-catch"></p>
           <!-- X(Twitter)でシェア(リンク先は script.js で設定) -->

@@ -249,6 +249,12 @@ const QUESTIONS = [
 const RESULTS = {
   care: {
     name: '伴走ケアラー',
+    character: {
+      file: 'images/characters/care.svg',
+      name: 'よりそいラッコ',
+      line: '手、つないでおくね',
+      alt: 'よりそいラッコ（伴走ケアラータイプのキャラクター）',
+    },
     catchCopy: '「ありがとう」が、いちばんの原動力。',
     features: [
       '患者さんや利用者さんと向き合い、その人の暮らしまで想像しながら関われるタイプです。',
@@ -289,6 +295,12 @@ const RESULTS = {
 
   research: {
     name: '探究スペシャリスト',
+    character: {
+      file: 'images/characters/research.svg',
+      name: 'なぜなぜフクロウ',
+      line: 'それ、根拠ある？',
+      alt: 'なぜなぜフクロウ（探究スペシャリストタイプのキャラクター）',
+    },
     catchCopy: '「なぜ?」を突きつめて、専門性を武器に。',
     features: [
       '新しい知見を自分で確かめ、理解できるまで掘り下げられるタイプです。',
@@ -329,6 +341,12 @@ const RESULTS = {
 
   system: {
     name: '仕組みデザイナー',
+    character: {
+      file: 'images/characters/system.svg',
+      name: 'しくみビーバー',
+      line: '次からは、こうしよう',
+      alt: 'しくみビーバー（仕組みデザイナータイプのキャラクター）',
+    },
     catchCopy: '一人を診る力で、たくさんの人を守る。',
     features: [
       '目の前の一人だけでなく、その背景にある組織や地域、制度に目が向くタイプです。',
@@ -371,6 +389,12 @@ const RESULTS = {
 
   business: {
     name: 'メディカルビジネス開拓者',
+    character: {
+      file: 'images/characters/business.svg',
+      name: 'ファーストペンギン',
+      line: 'まず、飛びこんでみる',
+      alt: 'ファーストペンギン（メディカルビジネス開拓者タイプのキャラクター）',
+    },
     catchCopy: '医療の知識を、新しい価値に変える。',
     features: [
       '医療を「事業」や「サービス」としてもとらえられる、視野の広いタイプです。',
@@ -409,6 +433,12 @@ const RESULTS = {
 
   teach: {
     name: 'ナレッジメッセンジャー',
+    character: {
+      file: 'images/characters/teach.svg',
+      name: 'つたえるハト',
+      line: 'つまり、こういうこと！',
+      alt: 'つたえるハト（ナレッジメッセンジャータイプのキャラクター）',
+    },
     catchCopy: '知っていることを、伝わる言葉で届ける。',
     features: [
       '難しい医療の話を、相手に合わせてわかりやすく伝えられるタイプです。',
@@ -447,6 +477,12 @@ const RESULTS = {
 
   balance: {
     name: 'ライフバランス・ナビゲーター',
+    character: {
+      file: 'images/characters/balance.svg',
+      name: 'マイペースガメ',
+      line: '定時で帰るのも、技術',
+      alt: 'マイペースガメ（ライフバランス・ナビゲータータイプのキャラクター）',
+    },
     catchCopy: '資格を活かして、無理なく長く。',
     features: [
       '仕事も生活も大切にしながら、自分のペースで長く働き続けたいタイプです。',
@@ -838,6 +874,12 @@ function showResult() {
   // ① タイプ名
   $('result-job').textContent = `${CONFIG.jobs[job]}のあなたは…`;
   // 「〇〇」と「タイプ」の間で折り返せるよう <wbr> を入れる
+  const ch = result.character;
+  const chImg = $('result-char-img');
+  chImg.src = ch.file;
+  chImg.alt = ch.alt;
+  $('result-char-name').textContent = ch.name;
+  $('result-char-line').textContent = `「${ch.line}」`;
   $('result-type-name').replaceChildren(result.name, document.createElement('wbr'), 'タイプ');
   $('result-catch').textContent = result.catchCopy;
 
