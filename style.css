@@ -981,6 +981,12 @@ a {
   color: var(--color-text-sub);
 }
 
+.cast__lead-s { display: block; }
+
+@media (max-width: 380px) {
+  .cast__lead { font-size: 12px; }
+}
+
 .cast__list {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
