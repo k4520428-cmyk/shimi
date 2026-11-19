@@ -661,6 +661,11 @@ a {
   display: inline-block;
 }
 
+/* 改行位置を指定したサービス(ctaLines)は、行ごとに1行で表示する */
+.btn--cta .btn__label-line {
+  display: block;
+}
+
 /* 幅の狭いスマホでは余白と文字を少し詰めて、「サービス名に」を1行に収める */
 @media (max-width: 340px) {
   .btn--cta {
