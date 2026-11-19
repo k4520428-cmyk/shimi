@@ -134,6 +134,8 @@ const CONFIG = {
       },
       {
         name: 'ジョブメドレーエージェント 医師',
+        // ボタン文言の改行位置(任意)。単語の途中で切れないよう、行ごとに指定する(計測用の name は変えない)
+        ctaLines: ['ジョブメドレー', 'エージェント医師'],
         operator: 'RM CAREER Co., Ltd.',
         url: 'https://dr-agent.job-medley.com/register/?utm_source=at&utm_medium=affiliate&utm_campaign=dr_reg_sp_at&route_no=6594&affnmsid=9709ae4fb121756c48dfe17435dd87bde8eaf04a',
         summary: '医師のための転職サポートを行う、ジョブメドレーのエージェントサービスです。',
@@ -147,6 +149,7 @@ const CONFIG = {
     pharmacist: [
       {
         name: 'ファーマキャリア(正社員)',
+        ctaLines: ['ファーマキャリア', '(正社員)'],
         operator: 'エニーキャリア株式会社',
         url: 'https://h.accesstrade.net/sp/cc?rk=0100q2hz00p2q1',
         pixel: 'https://h.accesstrade.net/sp/rr?rk=0100q2hz00p2q1',
@@ -859,7 +862,16 @@ function buildServiceCard(service) {
   const label = createEl('span', 'btn__label');
   const fullLabel = fillText(CONFIG.ctaButtonLabel, vars);
   const headLabel = fillText(CONFIG.ctaButtonLabel.split('}')[0] + '}', vars) + (CONFIG.ctaButtonLabel.charAt(CONFIG.ctaButtonLabel.indexOf('}') + 1) || '');
-  if (fullLabel.startsWith(headLabel) && headLabel !== fullLabel) {
+  if (service.ctaLines && fullLabel.startsWith(headLabel) && headLabel !== fullLabel) {
+    // 改行位置の指定あり:サービス名を行ごとのブロックにし、助詞「に」は最後の行に付ける
+    const particle = headLabel.slice(service.name.length);
+    service.ctaLines.forEach((line, i) => {
+      const last = i === service.ctaLines.length - 1;
+      label.append(createEl('span', 'btn__label-part btn__label-line', last ? line + particle : line));
+    });
+    label.append(createEl('span', 'btn__label-part', fullLabel.slice(headLabel.length)));
+    link.setAttribute('aria-label', fullLabel);
+  } else if (fullLabel.startsWith(headLabel) && headLabel !== fullLabel) {
     label.append(createEl('span', 'btn__label-part', headLabel));
     label.append(createEl('span', 'btn__label-part', fullLabel.slice(headLabel.length)));
   } else {
