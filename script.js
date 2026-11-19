@@ -145,6 +145,20 @@ const CONFIG = {
     ],
     pharmacist: [
       {
+        name: 'ファーマキャリア(正社員)',
+        operator: 'エニーキャリア株式会社',
+        url: 'https://h.accesstrade.net/sp/cc?rk=0100q2hz00p2q1',
+        pixel: 'https://h.accesstrade.net/sp/rr?rk=0100q2hz00p2q1',
+        summary: '薬剤師専門の転職支援サービスで、希望に合った求人を提案してもらえます。',
+        points: [
+          '大手で実績を上げてきたトップコンサルタントを中心に、一人ひとりにあった求人を提案し、内定まで導いてくれます。',
+          '転職サービスのセカンドオピニオンとして使う人も多いサービスです。',
+          '希望雇用形態を正社員として登録できます。',
+          '完全無料で利用できます。',
+          '厚生労働大臣許可の有料職業紹介事業として運営されています。',
+        ],
+      },
+      {
         name: 'ファルマスタッフ',
         operator: '株式会社メディカルリソース(日本調剤グループ)',
         url: 'https://www.38-8931.com/',
@@ -155,19 +169,6 @@ const CONFIG = {
           '転職後のフォローがあり、正社員のほか派遣の求人も扱っています。',
           '日本調剤の教育ノウハウを活かした教育サービスを提供しています。',
           '求職者は無料で利用できます。',
-        ],
-      },
-      {
-        name: 'ファーマキャリア(正社員)',
-        operator: 'エニーキャリア株式会社',
-        url: 'https://lp.pharmacareer.jp/short-full/?utm_source=accesstrade&utm_medium=cpa&utm_campaign=full',
-        summary: '薬剤師専門の転職支援サービスで、希望に合った求人を提案してもらえます。',
-        points: [
-          '大手で実績を上げてきたトップコンサルタントを中心に、一人ひとりにあった求人を提案し、内定まで導いてくれます。',
-          '転職サービスのセカンドオピニオンとして使う人も多いサービスです。',
-          '希望雇用形態を正社員として登録できます。',
-          '完全無料で利用できます。',
-          '厚生労働大臣許可の有料職業紹介事業として運営されています。',
         ],
       },
     ],
@@ -868,6 +869,17 @@ function buildServiceCard(service) {
   arrow.setAttribute('aria-hidden', 'true');
   link.append(arrow);
   card.append(link);
+  // アフィリエイト計測用の1x1画像(service.pixel がある場合のみ)
+  if (service.pixel) {
+    const pixel = createEl('img');
+    pixel.src = service.pixel;
+    pixel.width = 1;
+    pixel.height = 1;
+    pixel.alt = '';
+    pixel.setAttribute('aria-hidden', 'true');
+    pixel.style.border = '0';
+    card.append(pixel);
+  }
 
   card.append(createEl('p', 'cta__note', CONFIG.ctaNote));
   return card;
