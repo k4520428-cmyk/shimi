@@ -122,7 +122,8 @@ const CONFIG = {
       {
         name: 'ドクターキャスト',
         operator: '株式会社メディカルキャスト',
-        url: 'https://www.doctorcast.jp/sp/lp/',
+        url: 'https://h.accesstrade.net/sp/cc?rk=0100923h00p2q1',
+        pixel: 'https://h.accesstrade.net/sp/rr?rk=0100923h00p2q1',
         summary: '医師の転職・求人・募集を扱う、医師向けの求人サイトです。',
         points: [
           '医師登録をすると、求人を紹介してもらえます。',
