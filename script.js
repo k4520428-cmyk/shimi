@@ -136,6 +136,8 @@ const CONFIG = {
         name: 'ジョブメドレーエージェント 医師',
         // ボタン文言の改行位置(任意)。単語の途中で切れないよう、行ごとに指定する(計測用の name は変えない)
         ctaLines: ['ジョブメドレー', 'エージェント医師'],
+        // サービス名見出しの改行位置(1行に収まらない長い名前だけ指定)
+        nameLines: ['ジョブメドレー', 'エージェント 医師'],
         operator: 'RM CAREER Co., Ltd.',
         url: 'https://dr-agent.job-medley.com/register/?utm_source=at&utm_medium=affiliate&utm_campaign=dr_reg_sp_at&route_no=6594&affnmsid=9709ae4fb121756c48dfe17435dd87bde8eaf04a',
         summary: '医師のための転職サポートを行う、ジョブメドレーのエージェントサービスです。',
@@ -150,6 +152,7 @@ const CONFIG = {
       {
         name: 'ファーマキャリア(正社員)',
         ctaLines: ['ファーマキャリア', '(正社員)'],
+        nameLines: ['ファーマキャリア', '(正社員)'],
         operator: 'エニーキャリア株式会社',
         url: 'https://h.accesstrade.net/sp/cc?rk=0100q2hz00p2q1',
         pixel: 'https://h.accesstrade.net/sp/rr?rk=0100q2hz00p2q1',
@@ -816,7 +819,15 @@ function buildJobCard(item) {
 function buildServiceCard(service) {
   const vars = { service: service.name };
   const card = createEl('article', 'service-card');
-  card.append(createEl('h4', 'service-card__name', service.name));
+  const nameEl = createEl('h4', 'service-card__name');
+  if (service.nameLines) {
+    // 長い名前は行ごとのブロックにして折り返し位置をそろえる(読み上げは service.name のまま)
+    service.nameLines.forEach((line) => nameEl.append(createEl('span', 'service-card__name-line', line)));
+    nameEl.setAttribute('aria-label', service.name);
+  } else {
+    nameEl.textContent = service.name;
+  }
+  card.append(nameEl);
   card.append(createEl('p', 'service-card__operator', `運営:${service.operator}`));
   card.append(createEl('p', 'service-card__summary', service.summary));
 

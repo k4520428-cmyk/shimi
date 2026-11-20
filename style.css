@@ -713,19 +713,38 @@ a {
 }
 
 .service-card__name {
-  font-size: 20px;
+  margin: 0;
+  font-size: 21px;
   font-weight: 700;
-  color: var(--color-mint-deep);
+  color: #1F5A44;
+  background: #F2F8F3;
+  padding: 8px 12px;
+  border-radius: 12px;
+  line-height: 1.4;
+  font-feature-settings: "palt";
+  letter-spacing: -0.01em;
+  word-break: keep-all;
+}
+
+.service-card__name-line {
+  display: block;
+}
+
+@media (max-width: 380px) {
+  .service-card__name {
+    font-size: 19px;
+    padding: 8px 10px;
+  }
 }
 
 .service-card__operator {
-  margin-top: 2px;
+  margin-top: 8px;
   font-size: 12px;
   color: var(--color-text-sub);
 }
 
 .service-card__summary {
-  margin-top: 10px;
+  margin-top: 12px;
   font-size: 15px;
 }
 
