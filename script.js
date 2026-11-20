@@ -169,7 +169,8 @@ const CONFIG = {
         name: 'アポプラス薬剤師',
         ctaLines: ['アポプラス', '薬剤師'],
         operator: 'アポプラスキャリア株式会社',
-        url: 'https://www.apo-mjob.com/',
+        url: 'https://px.a8.net/svt/ejp?a8mat=4BGOWO+1PX8BM+52EE+5YJRM',
+        pixel: 'https://www18.a8.net/0.gif?a8mat=4BGOWO+1PX8BM+52EE+5YJRM',
         summary: '薬剤師の資格を持つ人の正社員転職を支援する、全国対応の転職サポートサービスです。',
         points: [
           '東証プライム市場上場のクオールホールディングスのグループ会社が運営しています。',
