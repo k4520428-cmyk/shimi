@@ -1187,3 +1187,25 @@ a {
 .result__char-img { display: block; width: 160px; height: 160px; margin: 0 auto; }
 .result__char-name { margin: 6px 0 0; font-size: 15px; font-weight: 700; color: var(--color-text); }
 .result__char-line { margin: 2px 0 0; font-size: 13px; color: var(--color-text-sub); }
+
+/* 掲載順バッジ・PR表記(サービス欄) */
+.service-pr {
+  margin: 6px 0 12px;
+  font-size: 12px;
+  color: var(--color-text-sub);
+}
+
+.service-card__rank {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  margin: 0 0 8px;
+  border-radius: 50%;
+  background: #1F5A44;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1;
+}

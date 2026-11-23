@@ -64,8 +64,10 @@ const CONFIG = {
   subJobsHeading: 'こちらも相性がよい仕事',
 
   // 結果画面「おすすめサービス」の見出し・説明({job} は職種名に置き換わります)
-  servicesHeading: '{job}におすすめの転職サービス',
-  servicesLead: '気になる仕事が見つかったら、{job}向けの転職サービスで求人を探したり、担当者に相談したりできます。複数のサービスに登録して、求人や担当者との相性を見比べるのもおすすめです。',
+  servicesHeading: 'あなたにおすすめの転職サービス',
+  servicesPr: 'PR(広告を含みます)',
+  servicesRankNote: '※番号は掲載順です。掲載順は当サイトの判断で、広告掲載の条件を含みます。サービスの優劣を示す順位ではありません。',
+  servicesLead: '気になる仕事が見つかったら、{job}向けの転職サービスで求人を探したり、担当者に相談したりできます。複数のサービスに登録して、求人や担当者との相性を見比べるのもおすすめです。サービスは職種に合わせて紹介していて、診断の回答で順番が変わることはありません。',
   servicesNote: '※サービス内容は2026年11月時点の各公式サイトの記載にもとづきます。最新の内容・求人数・対応エリアは、各公式サイトでご確認ください。',
 
   // CTAボタンの文言({service} はサービス名に置き換わります)
@@ -651,7 +653,7 @@ function loadAnalytics() {
 //   diagnosis_start    : 「診断をはじめる」を押した
 //   question_view      : 各質問を表示した(どこで離脱したかを見るため)
 //   diagnosis_complete : 結果画面を表示した
-//   service_click      : おすすめサービスのボタンを押した
+//   service_click      : おすすめサービスのボタンを押した(rank = 掲載順の番号)
 //   share_click        : 「結果をXでシェアする」を押した
 //   diagnosis_retry    : 「もう一度診断する」を押した
 function track(eventName, params = {}) {
@@ -829,9 +831,13 @@ function buildJobCard(item) {
 }
 
 // サービス紹介カードを作る(サービスごとに1枚)
-function buildServiceCard(service) {
+function buildServiceCard(service, index) {
   const vars = { service: service.name };
+  const rank = index + 1;
   const card = createEl('article', 'service-card');
+  const badge = createEl('p', 'service-card__rank', String(rank));
+  badge.setAttribute('aria-label', `掲載順 ${rank}番目`);
+  card.append(badge);
   const nameEl = createEl('h4', 'service-card__name');
   if (service.nameLines) {
     // 長い名前は行ごとのブロックにして折り返し位置をそろえる(読み上げは service.name のまま)
@@ -855,6 +861,7 @@ function buildServiceCard(service) {
   link.addEventListener('click', () => {
     track('service_click', {
       service_name: service.name,
+      rank,
       job: tracking.job,
       result_type: tracking.type,
     });
@@ -945,8 +952,9 @@ function showResult() {
 
   // ⑤ おすすめサービス(職種ごと)
   $('result-services-heading').textContent = fillText(CONFIG.servicesHeading, vars);
+  $('result-services-pr').textContent = `${CONFIG.servicesPr} ${CONFIG.servicesRankNote}`;
   $('result-services-lead').textContent = fillText(CONFIG.servicesLead, vars);
-  $('result-services').replaceChildren(...services.map(buildServiceCard));
+  $('result-services').replaceChildren(...services.map((service, i) => buildServiceCard(service, i)));
   $('result-services-note').textContent = CONFIG.servicesNote;
 
   // ⑥ 迷っている人への一言
