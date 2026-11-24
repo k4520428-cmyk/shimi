@@ -66,7 +66,7 @@ const CONFIG = {
   // 結果画面「おすすめサービス」の見出し・説明({job} は職種名に置き換わります)
   servicesHeading: 'あなたにおすすめの転職サービス',
   servicesPr: 'PR(広告を含みます)',
-  servicesRankNote: '※番号は掲載順です。掲載順は当サイトの判断で、広告掲載の条件を含みます。サービスの優劣を示す順位ではありません。',
+  servicesRankNote: '※掲載順は当サイトの判断で、広告掲載の条件を含みます。サービスの優劣を示す順位ではありません。',
   servicesLead: '気になる仕事が見つかったら、{job}向けの転職サービスで求人を探したり、担当者に相談したりできます。複数のサービスに登録して、求人や担当者との相性を見比べるのもおすすめです。',
   servicesNote: '※サービス内容は2026年11月時点の各公式サイトの記載にもとづきます。最新の内容・求人数・対応エリアは、各公式サイトでご確認ください。',
 
@@ -835,9 +835,6 @@ function buildServiceCard(service, index) {
   const vars = { service: service.name };
   const rank = index + 1;
   const card = createEl('article', 'service-card');
-  const badge = createEl('p', 'service-card__rank', String(rank));
-  badge.setAttribute('aria-label', `掲載順 ${rank}番目`);
-  card.append(badge);
   const nameEl = createEl('h4', 'service-card__name');
   if (service.nameLines) {
     // 長い名前は行ごとのブロックにして折り返し位置をそろえる(読み上げは service.name のまま)
