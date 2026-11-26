@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HIRAQU｜医師・薬剤師・看護師の適職診断</title>
+<meta name="description" content="HIRAQU(ひらく)は、医師・薬剤師・看護師のための適職診断。19の質問に答えるだけで、あなたの働き方の志向と、国家資格を活かせる向いている仕事がわかります。所要時間は約3分です。">
+<link rel="canonical" href="https://hiraqu.jp/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="HIRAQU">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="HIRAQU｜医師・薬剤師・看護師の適職診断">
+<meta property="og:description" content="19の質問で、あなたの働き方の志向と、国家資格を活かせる向いている仕事がわかります。所要時間は約3分です。">
+<meta property="og:image" content="https://k4520428-cmyk.github.io/shimi/images/ogp-v4.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="HIRAQU 医師・薬剤師・看護師の適職診断。全19問・約3分・登録不要">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="HIRAQU｜医師・薬剤師・看護師の適職診断">
+<meta name="twitter:description" content="19の質問で、あなたの働き方の志向と、国家資格を活かせる向いている仕事がわかります。所要時間は約3分です。">
+<meta name="twitter:image" content="https://k4520428-cmyk.github.io/shimi/images/ogp-v4.png">
+<meta name="twitter:image:alt" content="HIRAQU 医師・薬剤師・看護師の適職診断。全19問・約3分・登録不要">
+<noscript><meta http-equiv="refresh" content="0; url=https://hiraqu.jp/"></noscript>
+<script>
+// 旧URL(github.io/shimi/...)から新URL(hiraqu.jp)へ転送する。クエリ(UTM)とハッシュはそのまま引き継ぐ。
+(function () {
+  var NEW_ORIGIN = 'https://hiraqu.jp';
+  var GA_ID = 'G-GWSFYFZCS5';
+  var MAX_WAIT_MS = 600; // GA4の送信を待つ上限
+  var path = location.pathname.replace(/^\/shimi(?=\/|$)/, '');
+  if (path === '' || path === '/index.html') path = '/';
+  var target = NEW_ORIGIN + path + location.search + location.hash;
+  var done = false;
+  function go() {
+    if (done) return;
+    done = true;
+    location.replace(target);
+  }
+  setTimeout(go, MAX_WAIT_MS);
+  try {
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { window.dataLayer.push(arguments); };
+    gtag('js', new Date());
+    // page_location に元のURL(UTMつき)を入れる
+    gtag('config', GA_ID, { page_location: location.href, transport_type: 'beacon' });
+    gtag('event', 'legacy_redirect', { event_callback: go, event_timeout: MAX_WAIT_MS });
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+    s.onerror = go;
+    document.head.appendChild(s);
+  } catch (e) { go(); }
+})();
+</script>
+</head>
+<body>
+<p>HIRAQU は新しいアドレスに移動しました。自動で移動しない場合は <a href="https://hiraqu.jp/">https://hiraqu.jp/</a> を開いてください。</p>
+<noscript><p><a href="https://hiraqu.jp/">HIRAQU（hiraqu.jp）へ移動する</a></p></noscript>
+</body>
+</html>
