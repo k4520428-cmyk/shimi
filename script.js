@@ -45,7 +45,7 @@ const CONFIG = {
   //   hashtags : ハッシュタグ(# は不要)
   // ---------------------------------------------------------
   share: {
-    url: 'https://k4520428-cmyk.github.io/shimi/',
+    url: 'https://hiraqu.jp/',
     text: 'HIRAQUで適職診断をしたら、{job}の私は「{type}」でした!\nあなたは何タイプ?',
     hashtags: ['HIRAQU', '適職診断'],
     // シェア経由の訪問を見分けるため、シェアするURLに付けるパラメータ(UTM)
